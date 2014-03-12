@@ -11,17 +11,12 @@ set :whenever_command, "bundle exec whenever"
 require 'capistrano/setup'
 require 'capistrano/deploy'
 
-require 'capistrano/bundler'
-require 'capistrano/rails/assets'
-require 'capistrano/rails/migrations'
-
-require 'capistrano/rvm'
-
-set :stage, :production
-
+set :rvm_ruby_version, '2.0.0'
 
 SSHKit.config.command_map[:rake]  = 'bundle exec rake'
 SSHKit.config.command_map[:rails] = 'bundle exec rails'
+
+set :bundle_bins, %w{gem rake ruby}
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
