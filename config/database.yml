@@ -35,5 +35,5 @@ production:
   database: jammer
   pool: 5
   username: jammer
-  password: <%= begin IO.read("/var/www/jammer/.db") rescue "" end %>
+  password: <%= begin IO.read("/var/www/jammer.sd.ai/.db") rescue "" end %>
   host: localhost
