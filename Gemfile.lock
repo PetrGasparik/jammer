@@ -170,6 +170,7 @@ DEPENDENCIES
   capistrano-rvm
   coffee-rails (~> 4.0.0)
   debugger
+  execjs
   jbuilder (~> 1.2)
   jquery-rails
   mechanize
