@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Jammer</title>
+  <title>BTC Jammer</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
   <%= csrf_meta_tags %>
 </head>
-<body>
 
-<%= yield %>
+<body class="pure-skin-mine">
+
+<div class="header">
+  <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
+    <a class="pure-menu-heading" id="logo-text" href="<%= root_path %>">BTC Jammer</a>
+
+    <ul>
+      <li class="pure-menu-selected"><%= link_to 'Users', root_path %></a></li>
+      <!--<li><a href="#">Sign Up</a></li>-->
+    </ul>
+  </div>
+</div>
+
+<div id="content">
+  <%= yield %>
+</div>
+
+<div class="footer">
+<p class="legal-license">
+  &copy; 2014 Simon Detheridge (gh2k). Buy me a coffee: 1SimonVpxYccRrUCTUxdH15Ki2ZjLAB1p<br>
+  Site data is scraped from BTCJam nightly. Things might go wrong with that process, so do your own research. We
+  take no responsibility for your own funds.
+</p>
+</div>
 
 </body>
 </html>

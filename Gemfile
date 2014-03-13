@@ -55,3 +55,6 @@ gem 'mechanize'
 
 # Cron
 gem 'whenever', :require => false
+
+# This still isn't in mainline rails!
+gem 'will_paginate'

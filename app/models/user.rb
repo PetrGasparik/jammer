@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
     loop do
       page = agent.get("https://www.btcjam.com/users/#{uid}")
 
-      user = User.find_by_id(uid)
+      user = User.where(uid => :id)
 
       title = page.title
       if title == 'Peer to Peer Bitcoin Lending - BTCJam'

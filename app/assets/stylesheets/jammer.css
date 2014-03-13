@@ -1,0 +1,54 @@
+
+body {
+    background-color: #ffffff;
+    font-family: Sans-Serif;
+}
+
+.footer {
+    z-index:100;
+    position: fixed;
+    bottom:0px;
+    left:0;
+    width: 100%;
+    padding-left: 25px;
+    font-size: 70%;
+    background: #f1efea;
+    border-top: 1px solid #e4e1d7;
+    color: #46402f;
+}
+
+.home-menu > ul {
+    float: right;
+}
+
+#logo-text {
+    font-size: 20px;
+}
+
+#content {
+  padding: 40px 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    border-bottom: 1px solid #e4e1d7;
+    color: #5F5496;
+}
+
+.pure_paginator {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    zoom:1;
+    *display: inline;
+}
+
+#pagina {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

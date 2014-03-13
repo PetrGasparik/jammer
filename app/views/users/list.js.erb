@@ -1,0 +1,2 @@
+$("#user_content").html("<%= escape_javascript(render('users_table_content', users: @users )) %>")
+$("#pagina").html("<%= escape_javascript(will_paginate @users) %>")

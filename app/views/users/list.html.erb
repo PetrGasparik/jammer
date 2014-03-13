@@ -1,0 +1,26 @@
+<h1>Users</h1>
+
+<form class="pure-form" method="get" id="user_search">
+  <fieldset>
+    <legend>Filter by username</legend>
+
+    <input type="text" placeholder="type here" name="alias">
+    <input type="submit" value="search" class="pure-button pure-button-primary">
+  </fieldset>
+</form>
+
+<table class="pure-table">
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>Profile Link</th>
+    </tr>
+  </thead>
+  <tbody id="user_content">
+    <%= render 'users_table_content', users: @users %>
+  </tbody>
+</table>
+
+<div id="pagina">
+  <%= will_paginate @users %>
+</div>
