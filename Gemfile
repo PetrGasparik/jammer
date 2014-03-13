@@ -50,7 +50,7 @@ end
 gem 'debugger', group: [:development, :test]
 
 # Screen scraping
-gem 'nokogiri', '>= 1.6.1'
+gem 'nokogiri', ">= 1.6.2.beta.2"
 gem 'mechanize'
 
 # Cron
