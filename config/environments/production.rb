@@ -78,5 +78,5 @@ Jammer::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.secret_key_base = begin IO.read("/var/www/jammersd.io/.token") rescue "" end
+  config.secret_key_base = begin IO.read("/var/www/jammer.sd.ai/.token") rescue "" end
 end
