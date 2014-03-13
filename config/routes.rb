@@ -1,6 +1,6 @@
 Jammer::Application.routes.draw do
   resources :users, only: [:list] do
-    get :filter, :on => :collection
+    get :export, :on => :collection
   end
 
   root 'users#list'

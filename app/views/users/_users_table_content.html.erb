@@ -2,7 +2,6 @@
 <% @users.each do |user| %>
     <tr>
       <td><%= user.alias %></td>
-      <% u = "https://btcjam.com/users/#{user.id}" %>
-      <td><%= link_to u, u %></td>
+      <td><%= link_to user.profile_url, user.profile_url %></td>
     </tr>
 <% end %>

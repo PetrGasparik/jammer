@@ -35,4 +35,8 @@ class User < ActiveRecord::Base
       uid += 1
     end
   end
+
+  def profile_url
+    "https://btcjam.com/users/#{self.id}"
+  end
 end
