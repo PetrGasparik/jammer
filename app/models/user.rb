@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
     loop do
       page = agent.get("https://www.btcjam.com/users/#{uid}")
 
-      user = User.where(uid => :id)
+      user = User.find_by_id(uid)
 
       title = page.title
       if title == 'Peer to Peer Bitcoin Lending - BTCJam'
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
         # We've found a user
         attribs = {:id => uid, :alias => title.sub(/ - BTCJam$/, '')}
         if user
-          user.update_attributes!(attribs)
+          user.update_attributes!(attribs) or raise "Failed to update user #{uid}"
         else
           User.create!(attribs)
         end
