@@ -1,6 +1,8 @@
 require 'mechanize'
 
 class User < ActiveRecord::Base
+  has_many :loans
+
   def self.populate!
     agent = Mechanize.new
     agent.ca_file = Jammer::Application.config.ca_file

@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314122457) do
+ActiveRecord::Schema.define(version: 20140314123325) do
+
+  create_table "loans", force: true do |t|
+    t.integer  "user_id"
+    t.float    "advertised_amount"
+    t.float    "remaining_fund_amount"
+    t.float    "advertised_rate"
+    t.float    "btc_per_payment"
+    t.boolean  "exchange_linked"
+    t.integer  "term"
+    t.string   "state"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "loans", ["user_id"], name: "index_loans_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "alias"
