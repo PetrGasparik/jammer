@@ -11,12 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140311163613) do
+ActiveRecord::Schema.define(version: 20140314121632) do
 
   create_table "users", force: true do |t|
     t.string   "alias"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "payments_count"
+    t.float    "payments_btc"
+    t.integer  "active_count"
+    t.float    "active_btc"
+    t.integer  "repaid_count"
+    t.float    "repaid_btc"
+    t.integer  "funding_count"
+    t.float    "funding_btc"
+    t.integer  "overdue_count"
+    t.float    "overdue_btc"
   end
 
 end
