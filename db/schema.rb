@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314121632) do
+ActiveRecord::Schema.define(version: 20140314122457) do
 
   create_table "users", force: true do |t|
     t.string   "alias"
@@ -28,5 +28,7 @@ ActiveRecord::Schema.define(version: 20140314121632) do
     t.integer  "overdue_count"
     t.float    "overdue_btc"
   end
+
+  add_index "users", ["alias"], name: "index_users_on_alias", using: :btree
 
 end
