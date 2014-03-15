@@ -11,20 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314123325) do
+ActiveRecord::Schema.define(version: 20140315110051) do
 
   create_table "loans", force: true do |t|
     t.integer  "user_id"
-    t.float    "advertised_amount"
-    t.float    "remaining_fund_amount"
+    t.integer  "advertised_amount",     limit: 8
+    t.integer  "remaining_fund_amount", limit: 8
     t.float    "advertised_rate"
-    t.float    "btc_per_payment"
+    t.integer  "btc_per_payment",       limit: 8
     t.boolean  "exchange_linked"
     t.integer  "term"
     t.string   "state"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "frequency"
   end
 
   add_index "loans", ["user_id"], name: "index_loans_on_user_id", using: :btree
@@ -34,15 +35,9 @@ ActiveRecord::Schema.define(version: 20140314123325) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "payments_count"
-    t.float    "payments_btc"
-    t.integer  "active_count"
-    t.float    "active_btc"
-    t.integer  "repaid_count"
-    t.float    "repaid_btc"
-    t.integer  "funding_count"
-    t.float    "funding_btc"
+    t.integer  "payments_btc",   limit: 8
     t.integer  "overdue_count"
-    t.float    "overdue_btc"
+    t.integer  "overdue_btc",    limit: 8
   end
 
   add_index "users", ["alias"], name: "index_users_on_alias", using: :btree

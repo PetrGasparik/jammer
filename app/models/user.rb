@@ -25,29 +25,17 @@ class User < ActiveRecord::Base
       else
         # We've found a user
         user_alias = title.sub(/ - BTCJam$/, '')
-        
-        active_text = page.at('dt:contains("Active Loans") ~ dd').text
-        active_btc = active_text.scan(/^฿(\d+\.\d+)/).last.first
-        active_count = active_text.scan(/\((\d+)\)$/).last.first
-
-        repaid_text = page.at('dt:contains("Repaid Loans") ~ dd').text
-        repaid_btc = repaid_text.scan(/^฿(\d+\.\d+)/).last.first
-        repaid_count = repaid_text.scan(/\((\d+)\)$/).last.first
 
         payments_text = page.at('dt:contains("Payments Made") ~ dd').text
-        payments_btc = payments_text.scan(/^฿(\d+\.\d+)/).last.first
+        payments_btc = from_btc_str(payments_text.scan(/^฿(\d+\.\d+)/).last.first)
         payments_count = payments_text.scan(/\((\d+)\)$/).last.first
 
         overdue_text = page.at('dt:contains("Overdue Payments") ~ dd').text
-        overdue_btc = overdue_text.scan(/^฿(\d+\.\d+)/).last.first
+        overdue_btc = from_btc_str(overdue_text.scan(/^฿(\d+\.\d+)/).last.first)
         overdue_count = overdue_text.scan(/\((\d+)\)$/).last.first
 
         attribs = {:id => uid,
                    :alias => user_alias,
-                   :active_btc => active_btc,
-                   :active_count => active_count,
-                   :repaid_btc => repaid_btc,
-                   :repaid_count => repaid_count,
                    :payments_btc => payments_btc,
                    :payments_count => payments_count,
                    :overdue_btc => overdue_btc,
@@ -68,5 +56,55 @@ class User < ActiveRecord::Base
 
   def profile_url
     "https://btcjam.com/users/#{self.id}"
+  end
+
+  def active_btc
+    loans.where(:state => 'active').map(&:total_to_repay).reduce(:+) || 0
+  end
+
+  def active_count
+    loans.where(:state => 'active').count
+  end
+
+  def repaid_btc
+    loans.where(:state => 'repaid').map(&:total_to_repay).reduce(:+) || 0
+  end
+
+  def repaid_count
+    loans.where(:state => 'repaid').count
+  end
+
+  def funding_btc
+    loans.where(:state => 'funding').map(&:advertised_amount).reduce(:+) || 0
+  end
+
+  def funding_count
+    loans.where(:state => 'funding').count
+  end
+
+  def overdue_loan_count
+    loans.where(:state => 'overdue').count
+  end
+
+  def total_debt
+    if loans.find_all_by_state(%w(active overdue)).count == 0
+      0
+    else
+     (loans.find_all_by_state(%w(active repaid overdue)).map(&:total_to_repay).reduce(:+) || 0) - self.payments_btc
+    end
+  end
+
+  def future_debt
+    if loans.find_all_by_state(%w(active overdue)).count == 0
+      loans.find_all_by_state('funding').map(&:total_to_repay).reduce(:+) || 0
+    else
+      (loans.find_all_by_state(%w(active repaid funding overdue)).map(&:total_to_repay).reduce(:+) || 0) - self.payments_btc
+    end
+  end
+
+  private
+
+  def self.from_btc_str(s)
+    (s.to_f * 100000000.0).round
   end
 end

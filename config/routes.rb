@@ -1,5 +1,5 @@
 Jammer::Application.routes.draw do
-  resources :users, only: [:list] do
+  resources :users, only: [:list, :show] do
     get :export, :on => :collection
   end
 

@@ -11,4 +11,8 @@ module ApplicationHelper
     end
     super *[collection_or_options, options].compact
   end
+
+  def format_btc(btc)
+    btc.to_s.rjust(9, '0').insert(-9, '.')#.sub(/[.0]+$/, '').rjust(1, '0')
+  end
 end
