@@ -92,8 +92,16 @@ class Loan < ActiveRecord::Base
     advertised_amount - remaining_fund_amount
   end
 
+  def funding_ratio
+    (advertised_amount - remaining_fund_amount).to_f / advertised_amount.to_f
+  end
+
   def total_to_repay
-    btc_per_payment * payment_count
+    if state == 'funding'
+      btc_per_payment * payment_count
+    else
+      (btc_per_payment.to_f * funding_ratio * payment_count.to_f).round
+    end
   end
 
   def payment_count
