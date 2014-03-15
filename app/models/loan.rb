@@ -50,8 +50,6 @@ class Loan < ActiveRecord::Base
 
         remaining_fund_amount = from_btc_str(page.at('div.funded').at('p.alignright').text.scan(/(\d+\.\d+)/).last.first)
 
-        state = page.at('p:contains("Listing closed")').nil? ? "funding" : "closed"
-
         exchange_linked = (not page.image_with(alt: 'Glyphicons_050_link').nil?)
 
         case page.at('dt:contains("Payment") ~ dd ~ dd').at('small').text
@@ -67,7 +65,7 @@ class Loan < ActiveRecord::Base
 
         user_page = agent.get("https://www.btcjam.com/users/#{user_id}")
         state = user_page.at("//a[@href='/listings/#{loan_id}']").parent.parent.last_element_child.text.downcase.strip
-
+        state = 'funding' if state == 'funding in progress'
 
         attribs = {:id => loan_id,
                    :user_id => user_id,
