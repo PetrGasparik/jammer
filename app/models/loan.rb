@@ -100,7 +100,11 @@ class Loan < ActiveRecord::Base
     if state == 'funding'
       btc_per_payment * payment_count
     else
-      (btc_per_payment.to_f * funding_ratio * payment_count.to_f).round
+      begin
+        (btc_per_payment.to_f * funding_ratio * payment_count.to_f).round
+      rescue
+        0 # some idiot made a 0 BTC loan!
+      end
     end
   end
 
