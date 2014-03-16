@@ -58,3 +58,6 @@ gem 'whenever', :require => false
 
 # This still isn't in mainline rails!
 gem 'will_paginate'
+
+# Pretty charts
+gem 'chartkick'

@@ -4,6 +4,7 @@
   <title>BTC Jammer</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 
   <%= csrf_meta_tags %>
 </head>
@@ -15,8 +16,8 @@
     <a class="pure-menu-heading" id="logo-text" href="<%= root_path %>">BTC Jammer</a>
 
     <ul>
-      <li class="pure-menu-selected"><%= link_to 'Users', root_path %></a></li>
-      <!--<li><a href="#">Sign Up</a></li>-->
+      <li class="<%= @menu_tab.nil? ? 'pure-menu-selected' : '' %>"><%= link_to 'Users', root_path %></a></li>
+      <li class="<%= @menu_tab == 'stats' ? 'pure-menu-selected' : '' %>"><%= link_to 'Stats', :controller => 'meta', :action => 'stats' %></li>
     </ul>
   </div>
 </div>

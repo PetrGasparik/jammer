@@ -1,9 +1,15 @@
 Jammer::Application.routes.draw do
+  get "meta/stats"
   resources :users, only: [:list, :show] do
     get :export, :on => :collection
   end
 
   root 'users#list'
+
+  get 'stats' => 'meta#stats'
+  get 'stats/btc_stats' => 'meta#btc_stats'
+  get 'stats/loan_stats' => 'meta#loan_stats'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
