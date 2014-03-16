@@ -3,6 +3,10 @@ class MetaController < ApplicationController
     @menu_tab = 'stats'
   end
 
+  def faq
+    @menu_tab = 'faq'
+  end
+
   def btc_stats
     active_btc = 0
     repaid_btc = 0

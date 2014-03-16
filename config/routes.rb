@@ -1,5 +1,5 @@
 Jammer::Application.routes.draw do
-  get "meta/stats"
+
   resources :users, only: [:list, :show] do
     get :export, :on => :collection
   end
@@ -7,6 +7,7 @@ Jammer::Application.routes.draw do
   root 'users#list'
 
   get 'stats' => 'meta#stats'
+  get 'faq' => 'meta#faq'
   get 'stats/btc_stats' => 'meta#btc_stats'
   get 'stats/loan_stats' => 'meta#loan_stats'
 

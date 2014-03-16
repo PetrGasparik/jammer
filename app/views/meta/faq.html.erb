@@ -1,0 +1,63 @@
+<h1>Frequenly Asked Questions</h1>
+
+<h2>What is this?</h2>
+
+<p>
+  It's a way of looking up BTCJam users by their username, which is a facility that BTCJam itself does not provide.
+  It has also been extended to provide some useful stats about users in a way that I think is more useful than the
+  way provided by BTCJam. The idea is to give a slightly better overview of the financial state of each user to make
+  better informed decisions.
+</p>
+
+<h2>How accurate is this?</h2>
+
+<p>
+  Moderately so. It's updated infrequently and I have not checked every record. Also, there may be bugs. You should
+  exercise caution when investing your money and do your own research. I do not accept responsibility for anything
+  you do with your money after looking at this data.
+</p>
+
+<h2>How often is it updated?</h2>
+
+<p>
+  Nightly. The scraper takes a while to run, and I don't want to upset BTCJam enough that they prevent me from doing
+  so.
+</p>
+
+<h2>Can I get an export of the data for my own use?</h2>
+
+<p>
+  Yes, you may. It's available in various formats. Please note, that the data takes a while to generate so page load
+  times will be lengthy. Please don't grab it frequently. Exports ara available at the following urls:
+  <% %w(xml json yaml sql).each do |format| %>
+    <br><%= link_to export_users_url(:format => format), export_users_url(:format => format) %>
+  <% end %>
+</p>
+
+<h2>Can I get the source code for this page, or your scraper?</h2>
+
+<p>
+  Yes. It's on github: <a href="https://github.com/gh2k/jammer">https://github.com/gh2k/jammer</a><br>
+  Feel free to download or fork it. It's a Ruby-on-Rails application, using Rails 4 and Ruby 2. The scraper runs
+  on the "jammer:update" rake task.
+</p>
+
+<h2>Will you please add feature x?</h2>
+
+<p>
+  Maybe. It depends on whether I have the data, and whether I have the time. Sending tips helps! Feel free to contact
+  me on simon (at) highlyillogical (dot) org, for requests. Alternatively, feel free to fork the code on github and
+  send me a pull request.
+</p>
+
+<h2>Can I pay you to do x?</h2>
+
+<p>
+  See above :-)
+</p>
+
+<h2>Can I please send you a tip for all of your fine work?</h2>
+
+<p>
+  Certainly. My BTC address is 1SimonVpxYccRrUCTUxdH15Ki2ZjLAB1p and I thank you very much for your support.
+</p>
