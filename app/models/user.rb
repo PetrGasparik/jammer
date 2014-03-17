@@ -104,6 +104,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def invested_btc
+    investments.map(&:amount).reduce(:+) || 0
+  end
+
   private
 
   def self.from_btc_str(s)

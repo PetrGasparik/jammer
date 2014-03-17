@@ -11,5 +11,6 @@
       <td>฿<%= format_btc user.overdue_btc %> (<%= user.overdue_loan_count %>)</td>
       <td>฿<%= format_btc (user.total_debt.to_f / 10000000).round * 10000000 %></td>
       <td>฿<%= format_btc (user.future_debt.to_f / 10000000).round * 10000000 %></td>
+      <td>฿<%= format_btc user.invested_btc %> (<%= user.investments.count %>)</td>
     </tr>
 <% end %>
