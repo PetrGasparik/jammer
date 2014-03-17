@@ -10,6 +10,8 @@ Jammer::Application.routes.draw do
   get 'faq' => 'meta#faq'
   get 'stats/btc_stats' => 'meta#btc_stats'
   get 'stats/loan_stats' => 'meta#loan_stats'
+  get 'stats/user_stats' => 'meta#user_stats'
+  get 'stats/borrower_stats' => 'meta#borrower_stats'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

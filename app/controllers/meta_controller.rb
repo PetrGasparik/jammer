@@ -13,27 +13,73 @@ class MetaController < ApplicationController
     overdue_btc = 0
     funding_btc = 0
 
-    User.all.each do |user|
+    User.includes(:loans).each do |user|
       active_btc += user.total_debt - user.overdue_btc
       repaid_btc += user.payments_btc
       overdue_btc += user.overdue_btc
-      user.loans.find_all_by_state('funding').each do |loan|
-        funding_btc += loan.total_to_repay
-      end
+    end
+    Loan.where(state: 'funding').each do |loan|
+      funding_btc += loan.total_to_repay
     end
 
     render :json => {
-        'Repaid BTC' => repaid_btc,
-        'Active BTC' => active_btc,
-        'Overdue BTC' => overdue_btc,
-        'Funding BTC' => funding_btc }
+        'Repaid BTC' => format_btc(repaid_btc),
+        'Active BTC' => format_btc(active_btc),
+        'Overdue BTC' => format_btc(overdue_btc),
+        'Funding BTC' => format_btc(funding_btc) }
   end
 
   def loan_stats
     render :json => {
-        'Repaid Loans' => Loan.find_all_by_state('repaid').count,
-        'Active Loans' => Loan.find_all_by_state('active').count,
-        'Overdue Loans' => Loan.find_all_by_state('overdue').count,
-        'Funding Loans' => Loan.find_all_by_state('funding').count }
+        'Repaid Loans' => Loan.where(state: 'repaid').count,
+        'Active Loans' => Loan.where(state: 'active').count,
+        'Overdue Loans' => Loan.where(state: 'overdue').count,
+        'Funding Loans' => Loan.where(state: 'funding').count }
+  end
+
+  def user_stats
+    no_loans = 0
+    repaid_loans = 0
+    active_loans = 0
+    overdue_loans = 0
+
+    User.includes(:loans).each do |user|
+      if user.loans.where(state: 'overdue').count > 0
+        overdue_loans += 1
+      elsif user.loans.where(state: 'active').count > 0
+        active_loans += 1
+      elsif user.loans.where(state: 'repaid').count > 0
+        repaid_loans += 1
+      else
+        no_loans += 1
+      end
+    end
+
+    render :json => {
+        'Have repaid all loans' => repaid_loans,
+        'Have active but not overdue loans' => active_loans,
+        'Have overdue loans' => overdue_loans,
+        'Have never taken out a loan' => no_loans}
+  end
+
+  def borrower_stats
+    repaid_loans = 0
+    active_loans = 0
+    overdue_loans = 0
+
+    User.includes(:loans).each do |user|
+      if user.loans.where(state: 'overdue').count > 0
+        overdue_loans += 1
+      elsif user.loans.where(state: 'active').count > 0
+        active_loans += 1
+      elsif user.loans.where(state: 'repaid').count > 0
+        repaid_loans += 1
+      end
+    end
+
+    render :json => {
+        'Have repaid all loans' => repaid_loans,
+        'Have active but not overdue loans' => active_loans,
+        'Have overdue loans' => overdue_loans }
   end
 end

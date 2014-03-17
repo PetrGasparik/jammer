@@ -87,18 +87,18 @@ class User < ActiveRecord::Base
   end
 
   def total_debt
-    if loans.find_all_by_state(%w(active overdue)).count == 0
+    if loans.where(state: %w(active overdue)).count == 0
       0
     else
-     (loans.find_all_by_state(%w(active repaid overdue)).map(&:total_to_repay).reduce(:+) || 0) - self.payments_btc
+     (loans.where(state: %w(active repaid overdue)).map(&:total_to_repay).reduce(:+) || 0) - self.payments_btc
     end
   end
 
   def future_debt
-    if loans.find_all_by_state(%w(active overdue)).count == 0
-      loans.find_all_by_state('funding').map(&:total_to_repay).reduce(:+) || 0
+    if loans.where(state: %w(active overdue)).count == 0
+      loans.where(state: 'funding').map(&:total_to_repay).reduce(:+) || 0
     else
-      (loans.find_all_by_state(%w(active repaid funding overdue)).map(&:total_to_repay).reduce(:+) || 0) - self.payments_btc
+      (loans.where(state: %w(active repaid funding overdue)).map(&:total_to_repay).reduce(:+) || 0) - self.payments_btc
     end
   end
 
