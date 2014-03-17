@@ -1,5 +1,6 @@
 class Loan < ActiveRecord::Base
   belongs_to :user
+  has_many :investments
 
   def self.newest_loan
     agent = Mechanize.new
@@ -82,7 +83,24 @@ class Loan < ActiveRecord::Base
         if loan
           loan.update_attributes!(attribs) or raise "Failed to update loan #{loan_id}"
         else
-          Loan.create!(attribs)
+          loan = Loan.create!(attribs)
+        end
+
+        loan.investments.delete_all
+
+        # get the investment details from the loan page
+        page.at('th:contains("Investment Date")').ancestors('table').last.at('tbody').element_children.each do |investment_row|
+          cell = investment_row.at('td')
+
+          investment_user_id = cell.at('a.pull-left')['href'].sub(/.*\//, '').to_i
+          cell = cell.next_element
+
+          investment_amount = from_btc_str(cell.text.strip.sub('฿', ''))
+          cell = cell.next_element
+
+          investment_date = DateTime.parse(cell.text.strip)
+
+          Investment.create!(user_id: investment_user_id, loan: loan, invested_at: investment_date, amount: investment_amount)
         end
       end
     end

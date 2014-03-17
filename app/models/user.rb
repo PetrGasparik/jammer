@@ -2,7 +2,8 @@ require 'mechanize'
 
 class User < ActiveRecord::Base
   has_many :loans
-  default_scope :include => :loans
+  has_many :investments
+  default_scope :include => [:loans, :investments]
 
   def self.populate!
     agent = Mechanize.new
