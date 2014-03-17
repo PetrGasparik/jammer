@@ -13,7 +13,7 @@ class MetaController < ApplicationController
     overdue_btc = 0
     funding_btc = 0
 
-    User.includes(:loans).each do |user|
+    User.all.each do |user|
       active_btc += user.total_debt - user.overdue_btc
       repaid_btc += user.payments_btc
       overdue_btc += user.overdue_btc
@@ -43,12 +43,12 @@ class MetaController < ApplicationController
     active_loans = 0
     overdue_loans = 0
 
-    User.includes(:loans).each do |user|
-      if user.loans.where(state: 'overdue').count > 0
+    User.all.each do |user|
+      if user.loans.select{ |loan| loan.state == 'overdue' }.count > 0
         overdue_loans += 1
-      elsif user.loans.where(state: 'active').count > 0
+      elsif user.loans.select{ |loan| loan.state == 'active' }.count > 0
         active_loans += 1
-      elsif user.loans.where(state: 'repaid').count > 0
+      elsif user.loans.select{ |loan| loan.state == 'repaid' }.count > 0
         repaid_loans += 1
       else
         no_loans += 1
@@ -67,12 +67,12 @@ class MetaController < ApplicationController
     active_loans = 0
     overdue_loans = 0
 
-    User.includes(:loans).each do |user|
-      if user.loans.where(state: 'overdue').count > 0
+    User.all.each do |user|
+      if user.loans.select{ |loan| loan.state == 'overdue' }.count > 0
         overdue_loans += 1
-      elsif user.loans.where(state: 'active').count > 0
+      elsif user.loans.select{ |loan| loan.state == 'active' }.count > 0
         active_loans += 1
-      elsif user.loans.where(state: 'repaid').count > 0
+      elsif user.loans.select{ |loan| loan.state == 'repaid' }.count > 0
         repaid_loans += 1
       end
     end

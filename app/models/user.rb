@@ -2,6 +2,7 @@ require 'mechanize'
 
 class User < ActiveRecord::Base
   has_many :loans
+  default_scope :include => :loans
 
   def self.populate!
     agent = Mechanize.new
@@ -59,46 +60,46 @@ class User < ActiveRecord::Base
   end
 
   def active_btc
-    loans.where(:state => 'active').map(&:total_to_repay).reduce(:+) || 0
+    loans.select{ |loan| loan.state == 'active' }.map(&:total_to_repay).reduce(:+) || 0
   end
 
   def active_count
-    loans.where(:state => 'active').count
+    loans.select{ |loan| loan.state == 'active' }.count
   end
 
   def repaid_btc
-    loans.where(:state => 'repaid').map(&:total_to_repay).reduce(:+) || 0
+    loans.select{ |loan| loan.state == 'repaid' }.map(&:total_to_repay).reduce(:+) || 0
   end
 
   def repaid_count
-    loans.where(:state => 'repaid').count
+    loans.select{ |loan| loan.state == 'repaid' }.count
   end
 
   def funding_btc
-    loans.where(:state => 'funding').map(&:advertised_amount).reduce(:+) || 0
+    loans.select{ |loan| loan.state == 'funding' }.map(&:advertised_amount).reduce(:+) || 0
   end
 
   def funding_count
-    loans.where(:state => 'funding').count
+    loans.select{ |loan| loan.state == 'funding' }.count
   end
 
   def overdue_loan_count
-    loans.where(:state => 'overdue').count
+    loans.select{ |loan| loan.state == 'overdue' }.count
   end
 
   def total_debt
-    if loans.where(state: %w(active overdue)).count == 0
+    if loans.select{ |loan| %w(active overdue).include? loan.state }.count == 0
       0
     else
-     (loans.where(state: %w(active repaid overdue)).map(&:total_to_repay).reduce(:+) || 0) - self.payments_btc
+     (loans.select{ |loan| %w(active repaid overdue).include? loan.state }.map(&:total_to_repay).reduce(:+) || 0) - self.payments_btc
     end
   end
 
   def future_debt
-    if loans.where(state: %w(active overdue)).count == 0
-      loans.where(state: 'funding').map(&:total_to_repay).reduce(:+) || 0
+    if loans.select{ |loan| %w(active overdue).include? loan.state }.count == 0
+      loans.select{ |loan| loan.state == 'funding' }.map(&:total_to_repay).reduce(:+) || 0
     else
-      (loans.where(state: %w(active repaid funding overdue)).map(&:total_to_repay).reduce(:+) || 0) - self.payments_btc
+      (loans.select{ |loan| %w(active repaid funding overdue).include? loan.state }.map(&:total_to_repay).reduce(:+) || 0) - self.payments_btc
     end
   end
 
