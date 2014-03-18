@@ -7,6 +7,10 @@ class MetaController < ApplicationController
     @menu_tab = 'faq'
   end
 
+  def todo
+    @menu_tab = 'todo'
+  end
+
   def btc_stats
     active_btc = 0
     repaid_btc = 0

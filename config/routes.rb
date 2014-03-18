@@ -8,6 +8,7 @@ Jammer::Application.routes.draw do
 
   get 'stats' => 'meta#stats'
   get 'faq' => 'meta#faq'
+  get 'todo' => 'meta#todo'
   get 'stats/btc_stats' => 'meta#btc_stats'
   get 'stats/loan_stats' => 'meta#loan_stats'
   get 'stats/user_stats' => 'meta#user_stats'

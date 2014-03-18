@@ -13,12 +13,13 @@
 
 <div class="header">
   <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
-    <a class="pure-menu-heading" id="logo-text" href="<%= root_path %>">BTC Jammer</a>
+    <a class="pure-menu-heading" id="logo-text" href="<%= root_path %>">BTC Jammer <small>(BETA)</small></a>
 
     <ul>
       <li class="<%= @menu_tab.nil? ? 'pure-menu-selected' : '' %>"><%= link_to 'Users', root_path %></a></li>
       <li class="<%= @menu_tab == 'stats' ? 'pure-menu-selected' : '' %>"><%= link_to 'Stats', :controller => 'meta', :action => 'stats' %></li>
       <li class="<%= @menu_tab == 'faq' ? 'pure-menu-selected' : '' %>"><%= link_to 'FAQ', :controller => 'meta', :action => 'faq' %></li>
+      <li class="<%= @menu_tab == 'todo' ? 'pure-menu-selected' : '' %>"><%= link_to '//TODO', :controller => 'meta', :action => 'todo' %></li>
     </ul>
   </div>
 </div>
