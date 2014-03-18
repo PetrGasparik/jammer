@@ -1,6 +1,6 @@
 class Loan < ActiveRecord::Base
   belongs_to :user
-  has_many :investments
+  has_many :investments, :order => 'invested_at desc'
 
   def self.newest_loan
     agent = Mechanize.new
@@ -103,6 +103,13 @@ class Loan < ActiveRecord::Base
           Investment.create!(user_id: investment_user_id, loan: loan, invested_at: investment_date, amount: investment_amount)
         end
       end
+    end
+  end
+
+  def self.update_cached_data!
+    Loan.all.each do |loan|
+      loan.invested_at = loan.investments.last ? loan.investments.last.invested_at : nil
+      loan.save!
     end
   end
 

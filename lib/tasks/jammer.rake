@@ -4,5 +4,6 @@ namespace :jammer do
     User.populate!
     Loan.populate!
     User.update_cached_data!
+    Loan.update_cached_data!
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318162500) do
+ActiveRecord::Schema.define(version: 20140318165819) do
 
   create_table "investments", force: true do |t|
     t.integer  "user_id"
@@ -25,16 +25,17 @@ ActiveRecord::Schema.define(version: 20140318162500) do
   add_index "investments", ["user_id"], name: "index_investments_on_user_id", using: :btree
 
   create_table "loans", force: true do |t|
-    t.integer "user_id"
-    t.integer "advertised_amount",     limit: 8
-    t.integer "remaining_fund_amount", limit: 8
-    t.float   "advertised_rate"
-    t.integer "btc_per_payment",       limit: 8
-    t.boolean "exchange_linked"
-    t.integer "term"
-    t.string  "state"
-    t.string  "name"
-    t.string  "frequency"
+    t.integer  "user_id"
+    t.integer  "advertised_amount",     limit: 8
+    t.integer  "remaining_fund_amount", limit: 8
+    t.float    "advertised_rate"
+    t.integer  "btc_per_payment",       limit: 8
+    t.boolean  "exchange_linked"
+    t.integer  "term"
+    t.string   "state"
+    t.string   "name"
+    t.string   "frequency"
+    t.datetime "invested_at"
   end
 
   add_index "loans", ["state"], name: "index_loans_on_state", using: :btree
