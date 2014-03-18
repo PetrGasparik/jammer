@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     per_page = 20
 
     all_users = User.where("alias LIKE :search", search: alias_search).order("#{sort_column} #{sort_direction}")
-    page = [(all_users.count.to_f / per_page.to_f).ceil, params[:page].to_i].min
+    page = [[(all_users.count.to_f / per_page.to_f).ceil, params[:page].to_i].min, 1].max
 
     @users = all_users.paginate(:page => page, :per_page => per_page)
   end
