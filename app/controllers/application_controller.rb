@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :format_btc, :sort_column, :sort_direction
 
   def format_btc(btc)
-    btc.to_s.rjust(9, '0').insert(-9, '.').sub(/[.0]+$/, '').rjust(1, '0')
+    btc.to_s.rjust(9, '0').insert(-9, '.').sub(/[0]+$/, '').sub(/\.$/, '').rjust(1, '0')
   end
 
   protected

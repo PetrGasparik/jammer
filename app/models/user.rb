@@ -3,7 +3,6 @@ require 'mechanize'
 class User < ActiveRecord::Base
   has_many :loans
   has_many :investments
-  default_scope :include => [:loans, :investments]
 
   def self.populate!
     agent = Mechanize.new
@@ -56,56 +55,38 @@ class User < ActiveRecord::Base
     end
   end
 
+  def User.update_cached_data!
+    User.includes([:loans, :investments]).each do |user|
+      user.active_btc = user.loans.select{ |loan| loan.state == 'active' }.map(&:total_to_repay).reduce(:+) || 0
+      user.active_count = user.loans.select{ |loan| loan.state == 'active' }.count
+      user.repaid_btc = user.loans.select{ |loan| loan.state == 'repaid' }.map(&:total_to_repay).reduce(:+) || 0
+      user.repaid_count = user.loans.select{ |loan| loan.state == 'repaid' }.count
+      user.funding_btc = user.loans.select{ |loan| loan.state == 'funding' }.map(&:advertised_amount).reduce(:+) || 0
+      user.funding_count = user.loans.select{ |loan| loan.state == 'funding' }.count
+      user.overdue_loan_count = user.loans.select{ |loan| loan.state == 'overdue' }.count
+      if user.loans.select{ |loan| %w(active overdue).include? loan.state }.count == 0
+        user.total_debt = 0
+        user.future_debt = user.loans.select{ |loan| loan.state == 'funding' }.map(&:total_to_repay).reduce(:+) || 0
+      else
+        user.total_debt = (user.loans.select{ |loan| %w(active repaid overdue).include? loan.state }.map(&:total_to_repay).reduce(:+) || 0) - user.payments_btc
+        user.future_debt = (user.loans.select{ |loan| %w(active repaid funding overdue).include? loan.state }.map(&:total_to_repay).reduce(:+) || 0) - user.payments_btc
+      end
+      user.investments_btc = user.investments.map(&:amount).reduce(:+) || 0
+      user.investments_count = user.investments.count
+      user.active_investments_btc = user.investments.select{ |i| i.loan.state == 'active' }.map(&:amount).reduce(:+) || 0
+      user.active_investments_count = user.investments.select{ |i| i.loan.state == 'active' }.count
+      user.overdue_investments_btc = user.investments.select{ |i| i.loan.state == 'overdue' }.map(&:amount).reduce(:+) || 0
+      user.overdue_investments_count = user.investments.select{ |i| i.loan.state == 'overdue' }.count
+      user.funding_investments_btc = user.investments.select{ |i| i.loan.state == 'funding' }.map(&:amount).reduce(:+) || 0
+      user.funding_investments_count = user.investments.select{ |i| i.loan.state == 'funding' }.count
+      user.repaid_investments_btc = user.investments.select{ |i| i.loan.state == 'funding' }.map(&:amount).reduce(:+) || 0
+      user.repaid_investments_count = user.investments.select{ |i| i.loan.state == 'funding' }.count
+      user.save!
+    end
+  end
+
   def profile_url
     "https://btcjam.com/users/#{self.id}"
-  end
-
-  def active_btc
-    loans.select{ |loan| loan.state == 'active' }.map(&:total_to_repay).reduce(:+) || 0
-  end
-
-  def active_count
-    loans.select{ |loan| loan.state == 'active' }.count
-  end
-
-  def repaid_btc
-    loans.select{ |loan| loan.state == 'repaid' }.map(&:total_to_repay).reduce(:+) || 0
-  end
-
-  def repaid_count
-    loans.select{ |loan| loan.state == 'repaid' }.count
-  end
-
-  def funding_btc
-    loans.select{ |loan| loan.state == 'funding' }.map(&:advertised_amount).reduce(:+) || 0
-  end
-
-  def funding_count
-    loans.select{ |loan| loan.state == 'funding' }.count
-  end
-
-  def overdue_loan_count
-    loans.select{ |loan| loan.state == 'overdue' }.count
-  end
-
-  def total_debt
-    if loans.select{ |loan| %w(active overdue).include? loan.state }.count == 0
-      0
-    else
-     (loans.select{ |loan| %w(active repaid overdue).include? loan.state }.map(&:total_to_repay).reduce(:+) || 0) - self.payments_btc
-    end
-  end
-
-  def future_debt
-    if loans.select{ |loan| %w(active overdue).include? loan.state }.count == 0
-      loans.select{ |loan| loan.state == 'funding' }.map(&:total_to_repay).reduce(:+) || 0
-    else
-      (loans.select{ |loan| %w(active repaid funding overdue).include? loan.state }.map(&:total_to_repay).reduce(:+) || 0) - self.payments_btc
-    end
-  end
-
-  def invested_btc
-    investments.map(&:amount).reduce(:+) || 0
   end
 
   private
