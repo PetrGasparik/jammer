@@ -52,3 +52,15 @@ h6 {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+a {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a.active {
+    color: #5F5496;
+}

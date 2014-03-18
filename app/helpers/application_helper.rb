@@ -12,7 +12,12 @@ module ApplicationHelper
     super *[collection_or_options, options].compact
   end
 
-  def format_btc(btc)
-    btc.to_s.rjust(9, '0').insert(-9, '.').sub(/[.0]+$/, '').rjust(1, '0')
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    css_class = column == sort_column ? "active #{sort_direction}" : nil
+    direction = column == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
+    title += sort_direction == 'asc' ? ' ▲' : ' ▼' if column == sort_column
+
+    link_to(title, {:sort => column, :direction => direction, :page => params[:page], :search => params[:search], :filter => params[:filter], :alias => params[:alias], :remote => true}, {:class => css_class})
   end
 end

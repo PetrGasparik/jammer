@@ -1,2 +1,3 @@
 $("#user_content").html("<%= escape_javascript(render('users_table_content', users: @users )) %>")
+$("#table_header").html("<%= escape_javascript(render('users_table_header' )) %>")
 $("#pagina").html("<%= escape_javascript(will_paginate @users) %>")

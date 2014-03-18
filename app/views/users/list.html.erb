@@ -10,22 +10,8 @@
 </form>
 
 <table class="pure-table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Profile Link</th>
-      <th>Loans</th>
-      <th>Repaid Loans</th>
-      <th>Payments Made</th>
-      <th>Active Loans</th>
-      <th>Funding Loans</th>
-      <th>Overdue Payments</th>
-      <th>Approx. Debt</th>
-      <th>Potential Debt</th>
-      <th>Investments Made</th>
-    </tr>
-  </thead>
+  <thead id="table_header">
+    <%= render 'users_table_header', users: @users %></thead>
   <tbody id="user_content">
     <%= render 'users_table_content', users: @users %>
   </tbody>
