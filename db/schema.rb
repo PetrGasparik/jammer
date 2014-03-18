@@ -11,15 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318151543) do
+ActiveRecord::Schema.define(version: 20140318162500) do
 
   create_table "investments", force: true do |t|
     t.integer  "user_id"
     t.integer  "loan_id"
     t.integer  "amount",      limit: 8
     t.datetime "invested_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   add_index "investments", ["loan_id"], name: "index_investments_on_loan_id", using: :btree
@@ -27,18 +25,16 @@ ActiveRecord::Schema.define(version: 20140318151543) do
   add_index "investments", ["user_id"], name: "index_investments_on_user_id", using: :btree
 
   create_table "loans", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "advertised_amount",     limit: 8
-    t.integer  "remaining_fund_amount", limit: 8
-    t.float    "advertised_rate"
-    t.integer  "btc_per_payment",       limit: 8
-    t.boolean  "exchange_linked"
-    t.integer  "term"
-    t.string   "state"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "frequency"
+    t.integer "user_id"
+    t.integer "advertised_amount",     limit: 8
+    t.integer "remaining_fund_amount", limit: 8
+    t.float   "advertised_rate"
+    t.integer "btc_per_payment",       limit: 8
+    t.boolean "exchange_linked"
+    t.integer "term"
+    t.string  "state"
+    t.string  "name"
+    t.string  "frequency"
   end
 
   add_index "loans", ["state"], name: "index_loans_on_state", using: :btree
@@ -46,33 +42,31 @@ ActiveRecord::Schema.define(version: 20140318151543) do
   add_index "loans", ["user_id"], name: "index_loans_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "alias"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "payments_count"
-    t.integer  "payments_btc",              limit: 8
-    t.integer  "overdue_count"
-    t.integer  "overdue_btc",               limit: 8
-    t.integer  "loan_count"
-    t.integer  "repaid_btc",                limit: 8
-    t.integer  "active_btc",                limit: 8
-    t.integer  "funding_btc",               limit: 8
-    t.integer  "total_debt",                limit: 8
-    t.integer  "future_debt",               limit: 8
-    t.integer  "investments_btc",           limit: 8
-    t.integer  "active_investments_btc",    limit: 8
-    t.integer  "overdue_investments_btc",   limit: 8
-    t.integer  "funding_investments_btc",   limit: 8
-    t.integer  "repaid_investments_btc",    limit: 8
-    t.integer  "active_count"
-    t.integer  "repaid_count"
-    t.integer  "funding_count"
-    t.integer  "overdue_loan_count"
-    t.integer  "investments_count"
-    t.integer  "active_investments_count"
-    t.integer  "overdue_investments_count"
-    t.integer  "funding_investments_count"
-    t.integer  "repaid_investments_count"
+    t.string  "alias"
+    t.integer "payments_count"
+    t.integer "payments_btc",              limit: 8
+    t.integer "overdue_count"
+    t.integer "overdue_btc",               limit: 8
+    t.integer "loan_count"
+    t.integer "repaid_btc",                limit: 8
+    t.integer "active_btc",                limit: 8
+    t.integer "funding_btc",               limit: 8
+    t.integer "total_debt",                limit: 8
+    t.integer "future_debt",               limit: 8
+    t.integer "investments_btc",           limit: 8
+    t.integer "active_investments_btc",    limit: 8
+    t.integer "overdue_investments_btc",   limit: 8
+    t.integer "funding_investments_btc",   limit: 8
+    t.integer "repaid_investments_btc",    limit: 8
+    t.integer "active_count"
+    t.integer "repaid_count"
+    t.integer "funding_count"
+    t.integer "overdue_loan_count"
+    t.integer "investments_count"
+    t.integer "active_investments_count"
+    t.integer "overdue_investments_count"
+    t.integer "funding_investments_count"
+    t.integer "repaid_investments_count"
   end
 
   add_index "users", ["alias"], name: "index_users_on_alias", using: :btree
