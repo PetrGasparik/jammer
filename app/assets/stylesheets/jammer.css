@@ -39,6 +39,10 @@ h6 {
     color: #5F5496;
 }
 
+.strikethrough {
+    text-decoration: line-through;
+}
+
 .pure_paginator {
     display: inline-block;
     margin: 0;
