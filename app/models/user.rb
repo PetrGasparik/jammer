@@ -73,14 +73,14 @@ class User < ActiveRecord::Base
       end
       user.investments_btc = user.investments.map(&:amount).reduce(:+) || 0
       user.investments_count = user.investments.count
-      user.active_investments_btc = user.investments.select{ |i| i.loan.state == 'active' }.map(&:amount).reduce(:+) || 0
-      user.active_investments_count = user.investments.select{ |i| i.loan.state == 'active' }.count
-      user.overdue_investments_btc = user.investments.select{ |i| i.loan.state == 'overdue' }.map(&:amount).reduce(:+) || 0
-      user.overdue_investments_count = user.investments.select{ |i| i.loan.state == 'overdue' }.count
-      user.funding_investments_btc = user.investments.select{ |i| i.loan.state == 'funding' }.map(&:amount).reduce(:+) || 0
-      user.funding_investments_count = user.investments.select{ |i| i.loan.state == 'funding' }.count
-      user.repaid_investments_btc = user.investments.select{ |i| i.loan.state == 'funding' }.map(&:amount).reduce(:+) || 0
-      user.repaid_investments_count = user.investments.select{ |i| i.loan.state == 'funding' }.count
+      user.active_investments_btc = user.investments.select{ |i| i.loan && i.loan.state == 'active' }.map(&:amount).reduce(:+) || 0
+      user.active_investments_count = user.investments.select{ |i| i.loan && i.loan.state == 'active' }.count
+      user.overdue_investments_btc = user.investments.select{ |i| i.loan && i.loan.state == 'overdue' }.map(&:amount).reduce(:+) || 0
+      user.overdue_investments_count = user.investments.select{ |i| i.loan && i.loan.state == 'overdue' }.count
+      user.funding_investments_btc = user.investments.select{ |i| i.loan && i.loan.state == 'funding' }.map(&:amount).reduce(:+) || 0
+      user.funding_investments_count = user.investments.select{ |i| i.loan && i.loan.state == 'funding' }.count
+      user.repaid_investments_btc = user.investments.select{ |i| i.loan && i.loan.state == 'funding' }.map(&:amount).reduce(:+) || 0
+      user.repaid_investments_count = user.investments.select{ |i| i.loan && i.loan.state == 'funding' }.count
       user.save!
     end
   end
