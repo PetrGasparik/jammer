@@ -9,9 +9,18 @@
   <th><%= sortable 'active_btc', 'Active Loans' %></th>
   <th><%= sortable 'funding_btc', 'Funding Loans' %></th>
   <th><%= sortable 'overdue_btc', 'Overdue Payments' %></th>
-  <th><%= sortable 'total_debt', 'Approx Debt' %></th>
-  <th><%= sortable 'future_debt', 'Debt Incl. Funding' %></th>
-  <th><%= sortable 'investments_btc', 'Total Invested' %></th>
+  <th>
+    <%= sortable 'total_debt', 'Approx Debt' %>
+    <%= image_tag('question.png', :title => "The approximate total debt calcualted for this user, based on loans they have opened and payments they have made.\n\nIf they have taken out exchange-tied loans and the exchange rate has changed significantly, this may be inaccurate.") %>
+  </th>
+  <th>
+    <%= sortable 'future_debt', 'Debt Incl. Funding' %>
+    <%= image_tag('question.png', :title => "The approximate future debt calcualted for this user, based on loans they have opened, loans that are currently funding (should they fund) and payments they have made.\n\nIf they have taken out exchange-tied loans and the exchange rate has changed significantly, this may be inaccurate.") %>
+  </th>
+  <th>
+    <%= sortable 'investments_btc', 'Total Invested' %>
+    <%= image_tag('question.png', :title => 'Investment figures are based on the full amount a user has invested, not the remaining investment yet to be received. This is for technical reasons, based on the information available by BTCJam.') %>
+  </th>
   <th><%= sortable 'active_investments_btc', 'Active Investments' %></th>
   <th><%= sortable 'overdue_investments_btc', 'Overdue Investments' %></th>
   <th><%= sortable 'funding_investments_btc', 'Funding Investments' %></th>

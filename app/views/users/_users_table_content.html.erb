@@ -10,8 +10,14 @@
       <td>฿<%= format_btc user.active_btc %> (<%= user.active_count %>)</td>
       <td>฿<%= format_btc user.funding_btc %> (<%= user.funding_count %>)</td>
       <td>฿<%= format_btc user.overdue_btc %> (<%= user.overdue_loan_count %>)</td>
-      <td>฿<%= format_btc (user.total_debt.to_f / 10000000).round * 10000000 %></td>
-      <td>฿<%= format_btc (user.future_debt.to_f / 10000000).round * 10000000 %></td>
+      <td>
+        ฿<%= format_btc (user.total_debt.to_f / 10000000).round * 10000000 %>
+        <%= image_tag('question_red.png', :title => 'This value is based on exchange-linked loans and may not be accurate') if user.total_debt_has_exchange_link %>
+      </td>
+      <td>
+        ฿<%= format_btc (user.future_debt.to_f / 10000000).round * 10000000 %>
+        <%= image_tag('question_red.png', :title => 'This value is based on exchange-linked loans and may not be accurate') if user.future_debt_has_exchange_link %>
+      </td>
       <td>฿<%= format_btc user.investments_btc %> (<%= user.investments_count %>)</td>
       <td>฿<%= format_btc user.active_investments_btc %> (<%= user.active_investments_count %>)</td>
       <td>฿<%= format_btc user.overdue_investments_btc %> (<%= user.overdue_investments_count %>)</td>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318165819) do
+ActiveRecord::Schema.define(version: 20140322223345) do
 
   create_table "investments", force: true do |t|
     t.integer  "user_id"
@@ -45,20 +45,20 @@ ActiveRecord::Schema.define(version: 20140318165819) do
   create_table "users", force: true do |t|
     t.string  "alias"
     t.integer "payments_count"
-    t.integer "payments_btc",              limit: 8
+    t.integer "payments_btc",                  limit: 8
     t.integer "overdue_count"
-    t.integer "overdue_btc",               limit: 8
+    t.integer "overdue_btc",                   limit: 8
     t.integer "loan_count"
-    t.integer "repaid_btc",                limit: 8
-    t.integer "active_btc",                limit: 8
-    t.integer "funding_btc",               limit: 8
-    t.integer "total_debt",                limit: 8
-    t.integer "future_debt",               limit: 8
-    t.integer "investments_btc",           limit: 8
-    t.integer "active_investments_btc",    limit: 8
-    t.integer "overdue_investments_btc",   limit: 8
-    t.integer "funding_investments_btc",   limit: 8
-    t.integer "repaid_investments_btc",    limit: 8
+    t.integer "repaid_btc",                    limit: 8
+    t.integer "active_btc",                    limit: 8
+    t.integer "funding_btc",                   limit: 8
+    t.integer "total_debt",                    limit: 8
+    t.integer "future_debt",                   limit: 8
+    t.integer "investments_btc",               limit: 8
+    t.integer "active_investments_btc",        limit: 8
+    t.integer "overdue_investments_btc",       limit: 8
+    t.integer "funding_investments_btc",       limit: 8
+    t.integer "repaid_investments_btc",        limit: 8
     t.integer "active_count"
     t.integer "repaid_count"
     t.integer "funding_count"
@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 20140318165819) do
     t.integer "overdue_investments_count"
     t.integer "funding_investments_count"
     t.integer "repaid_investments_count"
+    t.boolean "total_debt_has_exchange_link"
+    t.boolean "future_debt_has_exchange_link"
   end
 
   add_index "users", ["alias"], name: "index_users_on_alias", using: :btree
