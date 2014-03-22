@@ -24,4 +24,8 @@
   <th><%= sortable 'active_investments_btc', 'Active Investments' %></th>
   <th><%= sortable 'overdue_investments_btc', 'Overdue Investments' %></th>
   <th><%= sortable 'funding_investments_btc', 'Funding Investments' %></th>
+  <th>
+    <%= sortable 'investment_ratio', 'Investment Ratio' %>
+    <%= image_tag('question.png', :title => "The ratio of lending to borrowing this user has. A high ratio indicates that the user has invested more in the site than they have borrowed.\n\nThis shows a large amount of collateral invested in the site, and might make them a good investment target.") %>
+  </th>
 </tr>

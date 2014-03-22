@@ -22,5 +22,6 @@
       <td>฿<%= format_btc user.active_investments_btc %> (<%= user.active_investments_count %>)</td>
       <td>฿<%= format_btc user.overdue_investments_btc %> (<%= user.overdue_investments_count %>)</td>
       <td>฿<%= format_btc user.funding_investments_btc %> (<%= user.funding_investments_count %>)</td>
+      <td><%= user.investment_ratio || 'N/A' %></td>
     </tr>
 <% end %>

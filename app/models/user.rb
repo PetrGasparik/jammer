@@ -83,6 +83,15 @@ class User < ActiveRecord::Base
       user.funding_investments_count = user.investments.select{ |i| i.loan && i.loan.state == 'funding' }.count
       user.repaid_investments_btc = user.investments.select{ |i| i.loan && i.loan.state == 'funding' }.map(&:amount).reduce(:+) || 0
       user.repaid_investments_count = user.investments.select{ |i| i.loan && i.loan.state == 'funding' }.count
+
+      total_active_borrowed = user.active_btc + user.funding_btc + user.overdue_btc
+      total_active_invested = user.active_investments_btc + user.overdue_investments_btc
+      if total_active_borrowed > 0 && total_active_invested > 0
+        user.investment_ratio = total_active_invested.to_f / total_active_borrowed.to_f
+      else
+        user.investment_ratio = 0.0
+      end
+
       user.save!
     end
   end
