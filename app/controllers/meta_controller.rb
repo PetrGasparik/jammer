@@ -17,12 +17,21 @@ class MetaController < ApplicationController
     overdue_btc = 0
     funding_btc = 0
 
-    User.all.each do |user|
+    months = case params[:period].to_i
+      when 6
+        6
+      when 12
+        12
+      else
+        9999
+    end
+
+    User.where('last_active_at >= ?', DateTime.now - months.months).each do |user|
       active_btc += user.total_debt - user.overdue_btc
       repaid_btc += user.payments_btc
       overdue_btc += user.overdue_btc
     end
-    Loan.where(state: 'funding').each do |loan|
+    Loan.where(state: 'funding').where('invested_at >= ?', DateTime.now - months.months).each do |loan|
       funding_btc += loan.total_to_repay
     end
 
@@ -34,9 +43,9 @@ class MetaController < ApplicationController
   end
 
   def loan_stats
-    case params[:period].to_i
+    months = case params[:period].to_i
     when 6
-      months = 6
+      6
     when 12
       12
     else
@@ -56,7 +65,16 @@ class MetaController < ApplicationController
     active_loans = 0
     overdue_loans = 0
 
-    User.all.each do |user|
+    months = case params[:period].to_i
+    when 6
+      6
+    when 12
+      12
+    else
+      9999
+    end
+
+    User.where('last_active_at >= ?', DateTime.now - months.months).each do |user|
       if user.loans.select{ |loan| loan.state == 'overdue' }.count > 0
         overdue_loans += 1
       elsif user.loans.select{ |loan| loan.state == 'active' }.count > 0
@@ -80,7 +98,16 @@ class MetaController < ApplicationController
     active_loans = 0
     overdue_loans = 0
 
-    User.all.each do |user|
+    months = case params[:period].to_i
+    when 6
+      6
+    when 12
+      12
+    else
+      9999
+    end
+
+    User.where('last_active_at >= ?', DateTime.now - months.months).each do |user|
       if user.loans.select{ |loan| loan.state == 'overdue' }.count > 0
         overdue_loans += 1
       elsif user.loans.select{ |loan| loan.state == 'active' }.count > 0
