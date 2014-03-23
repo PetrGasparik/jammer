@@ -4,7 +4,7 @@
       <td><%= user.id %></td>
       <td><%= user.alias %></td>
       <td><%= link_to user.profile_url, user.profile_url %></td>
-      <td><%= user.loans.count %><!-- <%= link_to 'View', user_path(user) %> --></td>
+      <td><%= user.loan_count %><!-- <%= link_to 'View', user_path(user) %> --></td>
       <td>฿<%= format_btc user.repaid_btc %> (<%= user.repaid_count %>)</td>
       <td>฿<%= format_btc user.payments_btc %> (<%= user.payments_count %>)</td>
       <td>฿<%= format_btc user.active_btc %> (<%= user.active_count %>)</td>

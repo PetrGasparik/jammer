@@ -93,6 +93,7 @@ class User < ActiveRecord::Base
       else
         user.investment_ratio = 0.0
       end
+      user.loan_count = user.loans.count
 
       user.save!
     end
