@@ -43,6 +43,10 @@ h6 {
     text-decoration: line-through;
 }
 
+.centered {
+    text-align: center;
+}
+
 .pure_paginator {
     display: inline-block;
     margin: 0;

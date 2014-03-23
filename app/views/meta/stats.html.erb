@@ -2,13 +2,57 @@
 
 <h2>Total BTC</h2>
 <div class="chart">
-  <%= pie_chart '/stats/btc_stats' %>
+  <table class="pure_table centered" width="100%">
+    <tr>
+      <th width="33%">Last 6 months</th>
+      <th width="34%">Last 12 months</th>
+      <th width="34%">All Time</th>
+    </tr>
+    <tr>
+      <td>
+        <div class="chart">
+          <%= pie_chart '/stats/btc_stats?period=6' %>
+        </div>
+      </td>
+      <td>
+        <div class="chart">
+          <%= pie_chart '/stats/btc_stats?period=12' %>
+        </div>
+      </td>
+      <td>
+        <div class="chart">
+          <%= pie_chart '/stats/btc_stats' %>
+        </div>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <h2>Total Loans</h2>
-<div class="chart">
-  <%= pie_chart '/stats/loan_stats' %>
-</div>
+<table class="pure_table centered" width="100%">
+  <tr>
+    <th width="33%">Last 6 months</th>
+    <th width="34%">Last 12 months</th>
+    <th width="34%">All Time</th>
+  </tr>
+  <tr>
+    <td>
+      <div class="chart">
+        <%= pie_chart '/stats/loan_stats?period=6' %>
+      </div>
+    </td>
+    <td>
+      <div class="chart">
+        <%= pie_chart '/stats/loan_stats?period=12' %>
+      </div>
+    </td>
+    <td>
+      <div class="chart">
+        <%= pie_chart '/stats/loan_stats' %>
+      </div>
+    </td>
+  </tr>
+</table>
 
 <h2>Users</h2>
 <div class="chart">

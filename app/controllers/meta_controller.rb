@@ -34,11 +34,20 @@ class MetaController < ApplicationController
   end
 
   def loan_stats
+    case params[:period].to_i
+    when 6
+      months = 6
+    when 12
+      12
+    else
+      9999
+    end
+
     render :json => {
-        'Repaid Loans' => Loan.where(state: 'repaid').count,
-        'Active Loans' => Loan.where(state: 'active').count,
-        'Overdue Loans' => Loan.where(state: 'overdue').count,
-        'Funding Loans' => Loan.where(state: 'funding').count }
+        'Repaid Loans' => Loan.where(state: 'repaid').where('invested_at >= ?', DateTime.now - months.months).count,
+        'Active Loans' => Loan.where(state: 'active').where('invested_at >= ?', DateTime.now - months.months).count,
+        'Overdue Loans' => Loan.where(state: 'overdue').where('invested_at >= ?', DateTime.now - months.months).count,
+        'Funding Loans' => Loan.where(state: 'funding').where('invested_at >= ?', DateTime.now - months.months).count }
   end
 
   def user_stats
