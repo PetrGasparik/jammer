@@ -69,9 +69,9 @@ class User < ActiveRecord::Base
         user.future_debt = user.loans.select{ |loan| loan.state == 'funding' }.map(&:total_to_repay).reduce(:+) || 0
       else
         user.total_debt = (user.loans.select{ |loan| %w(active repaid overdue).include? loan.state }.map(&:total_to_repay).reduce(:+) || 0) - user.payments_btc
-        user.total_debt_has_exchange_link = user.loans.select{ |loan| %w(active repaid overdue).include?(loan.state) && loan.exchange_linked }.count > 0
+        user.total_debt_has_exchange_link = user.loans.select{ |loan| %w(active overdue).include?(loan.state) && loan.exchange_linked }.count > 0
         user.future_debt = (user.loans.select{ |loan| %w(active repaid funding overdue).include? loan.state }.map(&:total_to_repay).reduce(:+) || 0) - user.payments_btc
-        user.future_debt_has_exchange_link = user.loans.select{ |loan| %w(active repaid overdue).include?(loan.state) && loan.exchange_linked }.count > 0
+        user.future_debt_has_exchange_link = user.loans.select{ |loan| %w(active overdue).include?(loan.state) && loan.exchange_linked }.count > 0
       end
       user.investments_btc = user.investments.map(&:amount).reduce(:+) || 0
       user.investments_count = user.investments.count
