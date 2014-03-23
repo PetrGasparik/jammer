@@ -2,9 +2,16 @@
 
 <form class="pure-form" method="get" id="user_search">
   <fieldset>
-    <legend>Filter by username</legend>
+    <legend>Filter users</legend>
 
-    <input type="text" placeholder="type here" name="alias">
+    <input type="text" placeholder="username" name="alias">
+    Last activity:
+    <select name="period" id="period_combo">
+    <% %w(3 6 9 12).each do |m| %>
+    <option value="<%= m %>" <%= m == @period.to_s ? 'selected="true"' : '' %>>Last <%= m %> months</option>
+    <% end %>
+    <option value="all" <%= 'all' == @period.to_s ? 'selected="true"' : '' %>>All Time</option>
+    </select>
     <input type="submit" value="search" class="pure-button pure-button-primary">
   </fieldset>
 </form>

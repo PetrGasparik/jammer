@@ -6,7 +6,10 @@ class UsersController < ApplicationController
 
     per_page = 20
 
+    @period = params[:period] || '3'
+
     all_users = User.where("alias LIKE :search", search: alias_search).order("#{sort_column} #{sort_direction}")
+    all_users = all_users.where("last_active_at > :period", period: DateTime.now() - @period.to_i.months) unless @period == 'all'
     page = [[(all_users.count.to_f / per_page.to_f).ceil, params[:page].to_i].min, 1].max
 
     @users = all_users.paginate(:page => page, :per_page => per_page)
