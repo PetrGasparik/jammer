@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140322231241) do
+ActiveRecord::Schema.define(version: 20140323221918) do
 
   create_table "investments", force: true do |t|
     t.integer  "user_id"
@@ -43,34 +43,35 @@ ActiveRecord::Schema.define(version: 20140322231241) do
   add_index "loans", ["user_id"], name: "index_loans_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string  "alias"
-    t.integer "payments_count"
-    t.integer "payments_btc",                  limit: 8
-    t.integer "overdue_count"
-    t.integer "overdue_btc",                   limit: 8
-    t.integer "loan_count"
-    t.integer "repaid_btc",                    limit: 8
-    t.integer "active_btc",                    limit: 8
-    t.integer "funding_btc",                   limit: 8
-    t.integer "total_debt",                    limit: 8
-    t.integer "future_debt",                   limit: 8
-    t.integer "investments_btc",               limit: 8
-    t.integer "active_investments_btc",        limit: 8
-    t.integer "overdue_investments_btc",       limit: 8
-    t.integer "funding_investments_btc",       limit: 8
-    t.integer "repaid_investments_btc",        limit: 8
-    t.integer "active_count"
-    t.integer "repaid_count"
-    t.integer "funding_count"
-    t.integer "overdue_loan_count"
-    t.integer "investments_count"
-    t.integer "active_investments_count"
-    t.integer "overdue_investments_count"
-    t.integer "funding_investments_count"
-    t.integer "repaid_investments_count"
-    t.boolean "total_debt_has_exchange_link"
-    t.boolean "future_debt_has_exchange_link"
-    t.float   "investment_ratio"
+    t.string   "alias"
+    t.integer  "payments_count"
+    t.integer  "payments_btc",                  limit: 8
+    t.integer  "overdue_count"
+    t.integer  "overdue_btc",                   limit: 8
+    t.integer  "loan_count"
+    t.integer  "repaid_btc",                    limit: 8
+    t.integer  "active_btc",                    limit: 8
+    t.integer  "funding_btc",                   limit: 8
+    t.integer  "total_debt",                    limit: 8
+    t.integer  "future_debt",                   limit: 8
+    t.integer  "investments_btc",               limit: 8
+    t.integer  "active_investments_btc",        limit: 8
+    t.integer  "overdue_investments_btc",       limit: 8
+    t.integer  "funding_investments_btc",       limit: 8
+    t.integer  "repaid_investments_btc",        limit: 8
+    t.integer  "active_count"
+    t.integer  "repaid_count"
+    t.integer  "funding_count"
+    t.integer  "overdue_loan_count"
+    t.integer  "investments_count"
+    t.integer  "active_investments_count"
+    t.integer  "overdue_investments_count"
+    t.integer  "funding_investments_count"
+    t.integer  "repaid_investments_count"
+    t.boolean  "total_debt_has_exchange_link"
+    t.boolean  "future_debt_has_exchange_link"
+    t.float    "investment_ratio"
+    t.datetime "last_active_at"
   end
 
   add_index "users", ["alias"], name: "index_users_on_alias", using: :btree

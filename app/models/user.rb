@@ -95,6 +95,10 @@ class User < ActiveRecord::Base
       end
       user.loan_count = user.loans.count
 
+      user.last_active_at = [user.last_active_at || Time.at(0).to_datetime,
+                             user.loans.to_a.map{ |l| l.invested_at || Time.at(0).to_datetime }.max || Time.at(0).to_datetime,
+                             user.investments.to_a.map{ |i| i.invested_at || Time.at(0).to_datetime }.max || Time.at(0).to_datetime].max
+
       user.save!
     end
   end

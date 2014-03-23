@@ -109,6 +109,8 @@ class Loan < ActiveRecord::Base
   def self.update_cached_data!
     Loan.all.each do |loan|
       loan.invested_at = loan.investments.last ? loan.investments.last.invested_at : nil
+      loan.user.last_active_at = [loan.user.last_active_at, loan.invested_at].max
+      loan.user.save!
       loan.save!
     end
   end
