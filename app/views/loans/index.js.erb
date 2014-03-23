@@ -1,0 +1,3 @@
+$("#loan_content").html("<%= escape_javascript(render('loans_table_content', users: @loans )) %>")
+$("#table_header").html("<%= escape_javascript(render('loans_table_header' )) %>")
+$("#pagina").html("<%= escape_javascript(will_paginate @loans) %>")

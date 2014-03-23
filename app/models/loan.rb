@@ -148,6 +148,21 @@ class Loan < ActiveRecord::Base
     end
   end
 
+  def percentage_return
+    interest = total_to_repay - closing_amount
+    r = (interest.to_f / total_to_repay.to_f).round(3)
+    r * 100.0
+  end
+
+  def apr
+    period = 365.0 / term.to_f
+    (percentage_return * period).round(2)
+  end
+
+  def btcjam_url
+    "https://btcjam.com/listings/#{id}"
+  end
+
   private
 
   def self.from_btc_str(s)

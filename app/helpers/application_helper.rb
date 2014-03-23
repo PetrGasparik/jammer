@@ -18,6 +18,9 @@ module ApplicationHelper
     direction = column == sort_column && sort_direction == 'desc' ? 'asc' : 'desc'
     title += sort_direction == 'asc' ? ' ▲' : ' ▼' if column == sort_column
 
-    link_to(title, {:sort => column, :direction => direction, :page => params[:page], :search => params[:search], :filter => params[:filter], :alias => params[:alias], :remote => true}, {:class => css_class})
+    link_parameters = {:sort => column, :direction => direction, :remote => true}
+    %w(page search filter alias period name funding overdue repaid active).each { |p| link_parameters.merge!( {p.to_sym => params[p]} )}
+
+    link_to(title, link_parameters, {:class => css_class})
   end
 end

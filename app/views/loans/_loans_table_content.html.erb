@@ -1,0 +1,17 @@
+
+<% @loans.each do |loan| %>
+    <tr>
+      <td><%= loan.id %></td>
+      <td><%= loan.name %></td>
+      <td><%= link_to loan.btcjam_url, "#{loan.btcjam_url}_from_jam.sd.ai" %></td>
+      <td><%= loan.state.capitalize %></td>
+      <td>฿<%= format_btc loan.advertised_amount %></td>
+      <td>฿<%= format_btc loan.btc_per_payment %></td>
+      <td><%= loan.term %></td>
+      <td><%= loan.payment_count %></td>
+      <td><%= loan.total_to_repay %></td>
+      <td><%= loan.percentage_return %>%</td>
+      <td><%= loan.apr %>%</td>
+      <td><span title='<%= loan.invested_at.to_s %>'><%= loan.invested_at.to_date.to_s %></span></td>
+    </tr>
+<% end %>

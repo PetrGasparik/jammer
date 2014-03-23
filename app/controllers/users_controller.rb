@@ -1,7 +1,9 @@
 require 'yaml'
 
 class UsersController < ApplicationController
-  def list
+  before_filter :set_tab
+
+  def index
     alias_search = "#{params[:alias]}%"
 
     per_page = 20
@@ -31,5 +33,14 @@ class UsersController < ApplicationController
       format.yaml { render text: data.to_yaml, :format => 'text/yaml' }
       format.sql { render text: `mysqldump --single-transaction --add-drop-table -u jammer --password=#{Rails.configuration.database_configuration[Rails.env]['password']} #{Rails.configuration.database_configuration[Rails.env]['database']}`, :format => 'text/sql' }
     end
+  end
+
+  def root_redirect
+    redirect_to users_url
+  end
+
+  private
+  def set_tab
+    @menu_tab = 'users'
   end
 end

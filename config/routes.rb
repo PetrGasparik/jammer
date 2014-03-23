@@ -1,10 +1,14 @@
 Jammer::Application.routes.draw do
 
-  resources :users, only: [:list, :show] do
+  resources :users, only: [:index, :show] do
     get :export, :on => :collection
   end
 
-  root 'users#list'
+  resources :loans, only: [:index, :show] do
+
+  end
+
+  root 'users#root_redirect'
 
   get 'stats' => 'meta#stats'
   get 'faq' => 'meta#faq'
