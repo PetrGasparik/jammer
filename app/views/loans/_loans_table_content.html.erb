@@ -3,6 +3,7 @@
     <tr>
       <td><%= loan.id %></td>
       <td><%= loan.name %></td>
+      <td><%= loan.user_name %></td>
       <td><%= link_to loan.btcjam_url, "#{loan.btcjam_url}_from_jam.sd.ai" %></td>
       <td><%= loan.state.capitalize %></td>
       <td>฿<%= format_btc loan.advertised_amount %></td>
