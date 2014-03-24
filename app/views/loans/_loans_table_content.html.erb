@@ -1,18 +1,47 @@
 
 <% @loans.each do |loan| %>
     <tr>
+      <% if @columns.include? 'id' %>
       <td><%= loan.id %></td>
+      <% end %>
+      <% if @columns.include? 'name' %>
       <td><%= loan.name %></td>
+      <% end %>
+      <% if @columns.include? 'user_name' %>
       <td><%= loan.user_name %></td>
+      <% end %>
+      <% if @columns.include? 'loan_link' %>
       <td><%= link_to loan.btcjam_url, "#{loan.btcjam_url}_from_btcjammer" %></td>
+      <% end %>
+      <% if @columns.include? 'user_link' %>
+      <td><%= loan.user ? link_to(loan.user.profile_url, loan.user.profile_url) : '<i>Not yet scraped</i>'.html_safe %></td>
+      <% end %>
+      <% if @columns.include? 'state' %>
       <td><%= loan.state.capitalize %></td>
+      <% end %>
+      <% if @columns.include? 'amount' %>
       <td>฿<%= format_btc loan.advertised_amount %></td>
+      <% end %>
+      <% if @columns.include? 'btc_per_payment' %>
       <td>฿<%= format_btc loan.btc_per_payment %></td>
+      <% end %>
+      <% if @columns.include? 'term' %>
       <td><%= loan.term %></td>
+      <% end %>
+      <% if @columns.include? 'payment_count' %>
       <td><%= loan.payment_count %></td>
+      <% end %>
+      <% if @columns.include? 'total_to_repay' %>
       <td>฿<%= format_btc loan.total_to_repay %></td>
+      <% end %>
+      <% if @columns.include? 'return' %>
       <td><%= loan.percentage_return.round(3) %>%</td>
+      <% end %>
+      <% if @columns.include? 'apr' %>
       <td><%= loan.apr.round(2) %>%</td>
+      <% end %>
+      <% if @columns.include? 'date' %>
       <td><span title='<%= loan.invested_at.to_s %>'><%= loan.invested_at.to_date.to_s %></span></td>
+      <% end %>
     </tr>
 <% end %>

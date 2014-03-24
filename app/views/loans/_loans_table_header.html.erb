@@ -1,16 +1,45 @@
 
 <tr>
+  <% if @columns.include? 'id' %>
   <th><%= sortable 'id', 'ID' %></th>
+  <% end %>
+  <% if @columns.include? 'name' %>
   <th><%= sortable 'name', 'Name' %></th>
+  <% end %>
+  <% if @columns.include? 'user_name' %>
   <th><%= sortable 'user_name', 'User Name' %></th>
+  <% end %>
+  <% if @columns.include? 'loan_link' %>
   <th>Loan Link</th>
+  <% end %>
+  <% if @columns.include? 'user_link' %>
+  <th>User Link</th>
+  <% end %>
+  <% if @columns.include? 'state' %>
   <th><%= sortable 'state', 'State' %></th>
+  <% end %>
+  <% if @columns.include? 'amount' %>
   <th><%= sortable 'advertised_amount', 'Amount' %></th>
+  <% end %>
+  <% if @columns.include? 'btc_per_payment' %>
   <th><%= sortable 'btc_per_payment', 'BTC Per Payment' %></th>
+  <% end %>
+  <% if @columns.include? 'term' %>
   <th><%= sortable 'term', 'Term' %></th>
+  <% end %>
+  <% if @columns.include? 'payment_count' %>
   <th>Payment Count</th>
+  <% end %>
+  <% if @columns.include? 'total_to_repay' %>
   <th>Total to Repay</th>
+  <% end %>
+  <% if @columns.include? 'return' %>
   <th>% Return</th>
+  <% end %>
+  <% if @columns.include? 'apr' %>
   <th>% APR</th>
+  <% end %>
+  <% if @columns.include? 'date' %>
   <th><%= sortable 'invested_at', 'Date' %></th>
+  <% end %>
 </tr>
