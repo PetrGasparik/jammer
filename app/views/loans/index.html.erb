@@ -16,7 +16,7 @@
     <% %w(repaid active overdue funding).each do |state| %>
     <input type="checkbox" name="<%= state %>" value="1" <%= @states[state] ? 'checked="true"' : '' %>> <%= state.capitalize %>
     <% end %>
-    <input type="submit" value="search" class="pure-button pure-button-primary">
+    <br><input type="submit" value="search" class="pure-button pure-button-primary">
   </fieldset>
 
   <fieldset>

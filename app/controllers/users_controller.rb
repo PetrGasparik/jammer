@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     rating_values += [2, 1, 0] if @ratings.include? 'E'
 
     all_users = User.where("alias LIKE :search", search: alias_search).where(credit_rating: rating_values).order("#{sort_column} #{sort_direction}")
+    all_users = all_users.where("funding_count > 0") if params[:only_funding] == '1'
     all_users = all_users.where("last_active_at > :period", period: DateTime.now() - @period.to_i.months) unless @period == 'all'
     page = [[(all_users.count.to_f / per_page.to_f).ceil, params[:page].to_i].min, 1].max
 

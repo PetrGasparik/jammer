@@ -12,10 +12,14 @@
     <% end %>
     <option value="all" <%= 'all' == @period.to_s ? 'selected="true"' : '' %>>All Time</option>
     </select>
+    &nbsp;&nbsp;
+    Rating:
     <% %w(A B C D E).each do |rating| %>
         <input type="checkbox" name="rating[]" value="<%= rating %>" <%= @ratings.include?(rating) ? 'checked="true"' : '' %>> <%= rating %>
     <% end %>
-    <input type="submit" value="search" class="pure-button pure-button-primary">
+    &nbsp;&nbsp;
+    <input type="checkbox" name="only_funding" value="1" <%= @only_funding ? 'checked="true"' : '' %>> Only users with funding loans
+    <br><input type="submit" value="search" class="pure-button pure-button-primary">
   </fieldset>
 
   <fieldset>
