@@ -77,6 +77,13 @@ a.active {
     font-size: 75%;
 }
 
+
+#column_selector td,
+#column_selector th {
+  border-left: 1px solid #e4e1d7;/* inner column border */
+  border-top: 1px solid #e4e1d7;/* inner column border */
+}
+
 .expand a {
     text-decoration: none;
 }

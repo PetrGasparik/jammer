@@ -27,7 +27,7 @@
 
     <div class="collapse">
     <!-- tables for layout? sue me, I'm lazy -->
-    <table id="column_selector">
+    <table id="column_selector" class="pure-table">
       <tr>
         <td>
           <input type="checkbox" name="columns[]" value="id" <%= @columns.include?('id') ? 'checked="true"' : '' %>> <strong>ID:</strong> BTC Jam ID
@@ -94,7 +94,7 @@
       </tr>
       <tr>
         <td>
-          <input type="checkbox" name="columns[]" value="investment_ratio" <%= @columns.include?('investment_ratio') ? 'checked="true"' : '' %>> <strong>Investment Ratio:</strong> Ratio of active investments to active loans<small>Note: A value of > 1 indicates the user has more collateral in BTC Jam than they are borrowing</small>
+          <input type="checkbox" name="columns[]" value="investment_ratio" <%= @columns.include?('investment_ratio') ? 'checked="true"' : '' %>> <strong>Investment Ratio:</strong> Ratio of active investments to active loans<br><small>Note: A value of > 1 indicates the user has more collateral in BTC Jam than they are borrowing</small>
         </td>
         <td>
           <input type="checkbox" name="columns[]" value="last_activity" <%= @columns.include?('last_activity') ? 'checked="true"' : '' %>> <strong>Last Activity:</strong> The time of the user's last investment or loan activation</small>
