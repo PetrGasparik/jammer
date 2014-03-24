@@ -152,7 +152,7 @@ class Loan < ActiveRecord::Base
   end
 
   def percentage_return
-    interest = total_to_repay - closing_amount
+    interest = total_to_repay - (state == 'funding' ? advertised_amount : closing_amount)
     r = (interest.to_f / total_to_repay.to_f).round(3)
     r * 100.0
   end

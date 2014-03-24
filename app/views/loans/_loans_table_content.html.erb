@@ -10,9 +10,9 @@
       <td>฿<%= format_btc loan.btc_per_payment %></td>
       <td><%= loan.term %></td>
       <td><%= loan.payment_count %></td>
-      <td><%= loan.total_to_repay %></td>
-      <td><%= loan.percentage_return %>%</td>
-      <td><%= loan.apr %>%</td>
+      <td>฿<%= format_btc loan.total_to_repay %></td>
+      <td><%= loan.percentage_return.round(3) %>%</td>
+      <td><%= loan.apr.round(2) %>%</td>
       <td><span title='<%= loan.invested_at.to_s %>'><%= loan.invested_at.to_date.to_s %></span></td>
     </tr>
 <% end %>
