@@ -19,8 +19,18 @@ module ApplicationHelper
     title += sort_direction == 'asc' ? ' ▲' : ' ▼' if column == sort_column
 
     link_parameters = {:sort => column, :direction => direction, :remote => true}
-    %w(page search filter alias period name funding overdue repaid active user_name loan_name borrower_name).each { |p| link_parameters.merge!( {p.to_sym => params[p]} )}
+    %w(page search filter alias period name funding overdue repaid active user_name loan_name borrower_name rating).each { |p| link_parameters.merge!( {p.to_sym => params[p]} )}
 
     link_to(title, link_parameters, {:class => css_class})
+  end
+
+  def credit_rating_str(rating)
+    {
+      14 => 'A+', 13 => 'A', 12 => 'A-',
+      11 => 'B+', 10 => 'B', 9 => 'B-',
+      8 => 'C+', 7 => 'C', 6 => 'C-',
+      5 => 'D+', 4 => 'D', 3 => 'D-',
+      2 => 'E+', 1 => 'E', 0 => 'E-',
+    }[rating]
   end
 end

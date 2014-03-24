@@ -1,6 +1,6 @@
 <h1>Users</h1>
 
-<form class="pure-form" method="get" id="user_search">
+<form class="pure-form" method="get" action="<%= users_path %>" id="user_search">
   <fieldset>
     <legend>Filter users</legend>
 
@@ -12,6 +12,9 @@
     <% end %>
     <option value="all" <%= 'all' == @period.to_s ? 'selected="true"' : '' %>>All Time</option>
     </select>
+    <% %w(A B C D E).each do |rating| %>
+        <input type="checkbox" name="rating[]" value="<%= rating %>" <%= @ratings.include?(rating) ? 'checked="true"' : '' %>> <%= rating %>
+    <% end %>
     <input type="submit" value="search" class="pure-button pure-button-primary">
   </fieldset>
 </form>
