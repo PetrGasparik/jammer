@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
       user = User.find_by_id(uid)
 
       title = page.title
-      if title == 'Peer to Peer Bitcoin Lending - BTCJam'
+      if title == 'Bitcoin Personal Loans - Invest with peer bitcoin lending - BTCJam'
         # redirects to front page if we find a deleted user
         del_count += 1
 
@@ -60,6 +60,9 @@ class User < ActiveRecord::Base
         rescue
           del_count += 1
           puts "Failed to parse user #{uid}"
+
+          # assuming a row of 10 deleted users means we've run out of users. It's an unusual-enough occurrence
+          break if del_count > 10
         end
       end
 
