@@ -25,37 +25,42 @@ class User < ActiveRecord::Base
         break if del_count > 10
       else
         # We've found a user
-        user_alias = title.sub(/ - BTCJam$/, '')
+        begin
+          user_alias = title.sub(/ - BTCJam$/, '')
 
-        payments_text = page.at('dt:contains("Payments Made") ~ dd').text
-        payments_btc = from_btc_str(payments_text.scan(/^฿(\d+\.\d+)/).last.first)
-        payments_count = payments_text.scan(/\((\d+)\)$/).last.first
+          payments_text = page.at('dt:contains("Payments Made") ~ dd').text
+          payments_btc = from_btc_str(payments_text.scan(/^฿(\d+\.\d+)/).last.first)
+          payments_count = payments_text.scan(/\((\d+)\)$/).last.first
 
-        overdue_text = page.at('dt:contains("Overdue Payments") ~ dd').text
-        overdue_btc = from_btc_str(overdue_text.scan(/^฿(\d+\.\d+)/).last.first)
-        overdue_count = overdue_text.scan(/\((\d+)\)$/).last.first
+          overdue_text = page.at('dt:contains("Overdue Payments") ~ dd').text
+          overdue_btc = from_btc_str(overdue_text.scan(/^฿(\d+\.\d+)/).last.first)
+          overdue_count = overdue_text.scan(/\((\d+)\)$/).last.first
 
-        credit_rating = {'A+' => 0, 'A' => 1, 'A-' => 2,
-                         'B+' => 3, 'B' => 4, 'B-' => 5,
-                         'C+' => 6, 'C' => 7, 'C-' => 8,
-                         'D+' => 9, 'D' => 10, 'D-' => 11,
-                         'E+' => 12, 'E' => 13, 'E-' => 14}[page.at('span.credit_label').text.gsub(/\s/, '')]
+          credit_rating = {'A+' => 0, 'A' => 1, 'A-' => 2,
+                           'B+' => 3, 'B' => 4, 'B-' => 5,
+                           'C+' => 6, 'C' => 7, 'C-' => 8,
+                           'D+' => 9, 'D' => 10, 'D-' => 11,
+                           'E+' => 12, 'E' => 13, 'E-' => 14}[page.at('span.credit_label').text.gsub(/\s/, '')]
 
-        attribs = {:id => uid,
-                   :alias => user_alias,
-                   :payments_btc => payments_btc,
-                   :payments_count => payments_count,
-                   :overdue_btc => overdue_btc,
-                   :overdue_count => overdue_count,
-                   :credit_rating => credit_rating}
+          attribs = {:id => uid,
+                     :alias => user_alias,
+                     :payments_btc => payments_btc,
+                     :payments_count => payments_count,
+                     :overdue_btc => overdue_btc,
+                     :overdue_count => overdue_count,
+                     :credit_rating => credit_rating}
 
-        if user
-          user.update_attributes!(attribs) or raise "Failed to update user #{uid}"
-        else
-          User.create!(attribs)
+          if user
+            user.update_attributes!(attribs) or raise "Failed to update user #{uid}"
+          else
+            User.create!(attribs)
+          end
+
+          del_count = 0
+        rescue
+          del_count += 1
+          puts "Failed to parse user #{uid}"
         end
-
-        del_count = 0
       end
 
       uid += 1
