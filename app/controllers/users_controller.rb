@@ -12,6 +12,8 @@ class UsersController < ApplicationController
     @ratings = params[:rating] || ['A', 'B', 'C', 'D', 'E']
     @columns = params[:columns] || session[:user_columns] || %w(alias profile_link rating total_repayments active_loans funding_loans overdue_payments active_investments approx_debt investment_ratio last_activity)
 
+    @investment_ratio = params[:investment_ratio].to_f if params[:investment_ratio]
+
     session[:user_columns] = params[:columns] if params[:columns]
 
     rating_values = []
@@ -23,6 +25,7 @@ class UsersController < ApplicationController
 
     all_users = User.where("alias LIKE :search", search: alias_search).where(credit_rating: rating_values).order("#{sort_column} #{sort_direction}")
     all_users = all_users.where("funding_count > 0") if params[:only_funding] == '1'
+    all_users = all_users.where("investment_ratio > :ratio", ratio: @investment_ratio) if params[:investment_ratio]
     all_users = all_users.where("last_active_at > :period", period: DateTime.now() - @period.to_i.months) unless @period == 'all'
     page = [[(all_users.count.to_f / per_page.to_f).ceil, params[:page].to_i].min, 1].max
 

@@ -18,7 +18,10 @@
         <input type="checkbox" name="rating[]" value="<%= rating %>" <%= @ratings.include?(rating) ? 'checked="true"' : '' %>> <%= rating %>
     <% end %>
     &nbsp;&nbsp;
+    <input placeholder="min. investment ratio" type="number" step="0.1" name="investment_ratio" value="<%= @investment_ratio %>">
+    &nbsp;&nbsp;
     <input type="checkbox" name="only_funding" value="1" <%= @only_funding ? 'checked="true"' : '' %>> Only users with funding loans
+    &nbsp;&nbsp;
     <input type="submit" value="search" class="pure-button pure-button-primary">
   </fieldset>
 

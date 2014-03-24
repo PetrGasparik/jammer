@@ -6,6 +6,7 @@
 
     <input type="text" placeholder="Loan Name" name="name">
     <input type="text" placeholder="User Name" name="user_name">
+    &nbsp;&nbsp;
     Invested within:
     <select name="period" id="period_combo">
       <% %w(3 6 9 12).each do |m| %>
@@ -13,9 +14,11 @@
       <% end %>
       <option value="all" <%= 'all' == @period.to_s ? 'selected="true"' : '' %>>All Time</option>
     </select>
+    &nbsp;&nbsp;
     <% %w(repaid active overdue funding).each do |state| %>
     <input type="checkbox" name="<%= state %>" value="1" <%= @states[state] ? 'checked="true"' : '' %>> <%= state.capitalize %>
     <% end %>
+    &nbsp;&nbsp;
     <input type="submit" value="search" class="pure-button pure-button-primary">
   </fieldset>
 
