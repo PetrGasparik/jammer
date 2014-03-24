@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324084415) do
+ActiveRecord::Schema.define(version: 20140324104303) do
 
   create_table "investments", force: true do |t|
     t.integer  "user_id"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20140324084415) do
     t.boolean  "future_debt_has_exchange_link"
     t.float    "investment_ratio"
     t.datetime "last_active_at"
+    t.integer  "credit_rating"
   end
 
   add_index "users", ["alias"], name: "index_users_on_alias", using: :btree

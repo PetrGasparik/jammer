@@ -35,12 +35,19 @@ class User < ActiveRecord::Base
         overdue_btc = from_btc_str(overdue_text.scan(/^฿(\d+\.\d+)/).last.first)
         overdue_count = overdue_text.scan(/\((\d+)\)$/).last.first
 
+        credit_rating = {'A+' => 0, 'A' => 1, 'A-' => 2,
+                         'B+' => 3, 'B' => 4, 'B-' => 5,
+                         'C+' => 6, 'C' => 7, 'C-' => 8,
+                         'D+' => 9, 'D' => 10, 'D-' => 11,
+                         'E+' => 12, 'E' => 13, 'E-' => 14}[page.at('span.credit_label').text.gsub(/\s/, '')]
+
         attribs = {:id => uid,
                    :alias => user_alias,
                    :payments_btc => payments_btc,
                    :payments_count => payments_count,
                    :overdue_btc => overdue_btc,
-                   :overdue_count => overdue_count}
+                   :overdue_count => overdue_count,
+                   :credit_rating => credit_rating}
 
         if user
           user.update_attributes!(attribs) or raise "Failed to update user #{uid}"
