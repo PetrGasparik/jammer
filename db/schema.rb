@@ -11,13 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140323221918) do
+ActiveRecord::Schema.define(version: 20140324003422) do
 
   create_table "investments", force: true do |t|
     t.integer  "user_id"
     t.integer  "loan_id"
-    t.integer  "amount",      limit: 8
+    t.integer  "amount",        limit: 8
     t.datetime "invested_at"
+    t.string   "state"
+    t.string   "loan_name"
+    t.string   "user_name"
+    t.string   "borrower_name"
   end
 
   add_index "investments", ["loan_id"], name: "index_investments_on_loan_id", using: :btree

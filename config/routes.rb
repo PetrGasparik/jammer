@@ -1,12 +1,12 @@
 Jammer::Application.routes.draw do
 
+  get "investments/list"
   resources :users, only: [:index, :show] do
     get :export, :on => :collection
   end
 
-  resources :loans, only: [:index, :show] do
-
-  end
+  resources :loans, only: [:index, :show]
+  resources :investments, only: [:index]
 
   root 'users#root_redirect'
 

@@ -1,0 +1,34 @@
+<h1>Investments</h1>
+
+<form class="pure-form" method="get" id="investment_search">
+  <fieldset>
+    <legend>Filter investments</legend>
+
+    <input type="text" placeholder="Investor Name" name="user_name">
+    <input type="text" placeholder="Loan Name" name="loan_name">
+    <input type="text" placeholder="Borrower Name" name="borrower_name">
+    Invested within:
+    <select name="period" id="period_combo">
+      <% %w(3 6 9 12).each do |m| %>
+          <option value="<%= m %>" <%= m == @period.to_s ? 'selected="true"' : '' %>>Last <%= m %> months</option>
+      <% end %>
+      <option value="all" <%= 'all' == @period.to_s ? 'selected="true"' : '' %>>All Time</option>
+    </select>
+    <% %w(repaid active overdue funding).each do |state| %>
+        <input type="checkbox" name="<%= state %>" value="1" <%= @states[state] ? 'checked="true"' : '' %>> <%= state.capitalize %>
+    <% end %>
+    <input type="submit" value="search" class="pure-button pure-button-primary">
+  </fieldset>
+</form>
+
+<table class="pure-table">
+  <thead id="table_header">
+  <%= render 'investments_table_header', loans: @investments %></thead>
+  <tbody id="investment_content">
+  <%= render 'investments_table_content', loans: @investments %>
+  </tbody>
+</table>
+
+<div id="pagina">
+  <%= will_paginate @investments %>
+</div>
