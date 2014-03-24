@@ -19,7 +19,7 @@ module ApplicationHelper
     title += sort_direction == 'asc' ? ' ▲' : ' ▼' if column == sort_column
 
     link_parameters = {:sort => column, :direction => direction, :remote => true}
-    %w(page search filter alias period name funding overdue repaid active user_name loan_name borrower_name rating).each { |p| link_parameters.merge!( {p.to_sym => params[p]} )}
+    %w(page search filter alias period name funding overdue repaid active user_name loan_name borrower_name rating columns).each { |p| link_parameters.merge!( {p.to_sym => params[p]} )}
 
     link_to(title, link_parameters, {:class => css_class})
   end

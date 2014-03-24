@@ -72,3 +72,23 @@ a:visited {
 a.active {
     color: #5F5496;
 }
+
+#column_selector {
+    font-size: 75%;
+}
+
+.expand a {
+    text-decoration: none;
+}
+
+.expand a:link, .expand a:visited {
+  background: image-url('arrow-down.gif') no-repeat 98% 50%;
+}
+
+.expand a.open:link, .expand a.open:visited {
+  background: image-url('arrow-up.gif') no-repeat 98% 50%;
+}
+
+.expand a:hover, .expand a:active, .expand a:focus {
+    text-decoration: underline;
+}
