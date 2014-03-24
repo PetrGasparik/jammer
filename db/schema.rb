@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324003422) do
+ActiveRecord::Schema.define(version: 20140324084415) do
 
   create_table "investments", force: true do |t|
     t.integer  "user_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140324003422) do
     t.string   "name"
     t.string   "frequency"
     t.datetime "invested_at"
+    t.string   "user_name"
   end
 
   add_index "loans", ["state"], name: "index_loans_on_state", using: :btree

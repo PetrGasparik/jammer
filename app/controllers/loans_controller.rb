@@ -3,6 +3,7 @@ class LoansController < ApplicationController
 
   def index
     name_search = "#{params[:name]}%"
+    user_name_search = "#{params[:user_name]}%"
 
     @states = {}
 
@@ -22,7 +23,7 @@ class LoansController < ApplicationController
 
     @period = params[:period] || '3'
 
-    all_loans = Loan.where("name LIKE :search", search: name_search).order("#{sort_column} #{sort_direction}")
+    all_loans = Loan.where("name LIKE :search AND user_name LIKE :user_name_search", search: name_search, user_name_search: user_name_search).order("#{sort_column} #{sort_direction}")
     all_loans = all_loans.where("invested_at > :period", period: DateTime.now() - @period.to_i.months) unless @period == 'all'
     all_loans = all_loans.where(state: @states.keys.select{ |k| @states[k] })
     page = [[(all_loans.count.to_f / per_page.to_f).ceil, params[:page].to_i].min, 1].max
