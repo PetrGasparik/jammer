@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
       user.repaid_investments_count = user.investments.select{ |i| i.loan && i.loan.state == 'funding' }.count
 
       # consensus appears to be that it's better to only include 'active' here
-      total_active_borrowed = user.active_btc # + user.funding_btc + user.overdue_btc
+      total_active_borrowed = user.active_btc + user.funding_btc # + user.overdue_btc
       total_active_invested = user.active_investments_btc # + user.overdue_investments_btc
       if total_active_borrowed > 0 && total_active_invested > 0
         user.investment_ratio = total_active_invested.to_f / total_active_borrowed.to_f
