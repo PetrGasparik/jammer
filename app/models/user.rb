@@ -98,8 +98,8 @@ class User < ActiveRecord::Base
       user.overdue_investments_count = user.investments.select{ |i| i.loan && i.loan.state == 'overdue' }.count
       user.funding_investments_btc = user.investments.select{ |i| i.loan && i.loan.state == 'funding' }.map(&:amount).reduce(:+) || 0
       user.funding_investments_count = user.investments.select{ |i| i.loan && i.loan.state == 'funding' }.count
-      user.repaid_investments_btc = user.investments.select{ |i| i.loan && i.loan.state == 'funding' }.map(&:amount).reduce(:+) || 0
-      user.repaid_investments_count = user.investments.select{ |i| i.loan && i.loan.state == 'funding' }.count
+      user.repaid_investments_btc = user.investments.select{ |i| i.loan && i.loan.state == 'repaid' }.map(&:amount).reduce(:+) || 0
+      user.repaid_investments_count = user.investments.select{ |i| i.loan && i.loan.state == 'repaid' }.count
 
       # consensus appears to be that it's better to only include 'active' here
       total_active_borrowed = user.active_btc + user.funding_btc # + user.overdue_btc
