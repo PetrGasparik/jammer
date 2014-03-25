@@ -32,6 +32,11 @@ class UsersController < ApplicationController
     @users = all_users.paginate(:page => page, :per_page => per_page)
   end
 
+  def show
+    @user = User.find_by_id(params[:id])
+    raise ActiveRecord::RecordNotFound if @user.nil?
+  end
+
   def export
     unless request.format == 'sql'
       data = User.includes(:loans).to_a.map do |user|
@@ -52,6 +57,44 @@ class UsersController < ApplicationController
 
   def root_redirect
     redirect_to users_url
+  end
+
+  def al_chart_data
+    user = User.find(params[:user_id])
+
+    data = [
+        {name: 'Active', data: {:Investments => format_btc(user.active_investments_btc), :Loans => format_btc(user.active_btc), 'Debt (estimated)' => format_btc([user.total_debt - user.overdue_btc, 0].max)}},
+        {name: 'Overdue', data: {:Investments => format_btc(user.overdue_investments_btc), :Loans => format_btc(user.overdue_btc), 'Debt (estimated)' => format_btc(user.overdue_btc > user.total_debt ? user.total_debt : user.overdue_btc)}},
+        {name: 'Funding', data: {:Investments => format_btc(user.funding_investments_btc), :Loans => format_btc(user.funding_btc), 'Debt (estimated)' => format_btc(user.future_debt - user.total_debt)}}
+    ]
+
+    render :json => data
+  end
+
+  def borrowing_chart_data
+    user = User.find(params[:user_id])
+
+    data = {
+        'Repaid' => format_btc(user.repaid_btc),
+        'Active' => format_btc(user.active_btc),
+        'Funding' => format_btc(user.funding_btc),
+        'Overdue' => format_btc(user.overdue_btc)
+    }
+
+    render :json => data
+  end
+
+  def lending_chart_data
+    user = User.find(params[:user_id])
+
+    data = {
+        'Repaid' => format_btc(user.repaid_investments_btc),
+        'Active' => format_btc(user.active_investments_btc),
+        'Funding' => format_btc(user.funding_investments_btc),
+        'Overdue' => format_btc(user.overdue_investments_btc)
+    }
+
+    render :json => data
   end
 
   private

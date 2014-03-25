@@ -86,7 +86,7 @@ class Loan < ActiveRecord::Base
           loan = Loan.create!(attribs)
         end
 
-        loan.investments.delete_all
+        loan.investments.destroy_all
 
         # get the investment details from the loan page
         page.at('th:contains("Investment Date")').ancestors('table').last.at('tbody').element_children.each do |investment_row|

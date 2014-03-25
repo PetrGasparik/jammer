@@ -5,7 +5,7 @@
       <td><%= user.id %></td>
       <% end %>
       <% if @columns.include? 'alias' %>
-      <td><%= user.alias %></td>
+      <td><%= link_to user.alias, user_path(user) %></td>
       <% end %>
       <% if @columns.include? 'profile_link' %>
       <td><%= link_to user.profile_url, user.profile_url %></td>

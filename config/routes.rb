@@ -3,6 +3,9 @@ Jammer::Application.routes.draw do
   get "investments/list"
   resources :users, only: [:index, :show] do
     get :export, :on => :collection
+    get :al_chart_data
+    get :borrowing_chart_data
+    get :lending_chart_data
   end
 
   resources :loans, only: [:index, :show]

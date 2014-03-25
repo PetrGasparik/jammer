@@ -1,6 +1,8 @@
 class Investment < ActiveRecord::Base
   belongs_to :user
   belongs_to :loan
+  validates :loan_id, :presence => true
+  validates :user_id, :presence => true
 
   def self.update_cached_data!
     Investment.all.each do |investment|

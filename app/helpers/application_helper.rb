@@ -33,4 +33,9 @@ module ApplicationHelper
       2 => 'E+', 1 => 'E', 0 => 'E-',
     }[rating]
   end
+
+  def credit_label(rating)
+    str = credit_rating_str(rating)
+    "<span class='credit_label credit_#{str[0].downcase}'>#{str}</span>".html_safe
+  end
 end
