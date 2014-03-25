@@ -1,0 +1,24 @@
+.credit_label {
+    padding: 1px 9px 2px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    font-size: 30.998px;
+    line-height: 48px;
+    color: white;
+}
+.credit_a {
+    background-color: #306eb9;
+}
+.credit_b {
+    background-color: #3a87ad;
+}
+.credit_c {
+     background-color: #468847;
+ }
+.credit_d {
+    background-color: #f89406;
+}
+.credit_e {
+    background-color: #b94a48;
+}

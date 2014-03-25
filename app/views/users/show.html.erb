@@ -1,0 +1,15 @@
+<h1><%= credit_label @user.credit_rating %> <%= @user.alias %></h1>
+
+<strong>BTC Jam Profile URL:</strong> <%= link_to @user.profile_url, @user.profile_url %>
+
+<h2>Assets and Liabilities</h2>
+
+<%= bar_chart user_al_chart_data_path(@user), :stacked => true %>
+
+<h2>Borrowing</h2>
+
+<%= bar_chart user_borrowing_chart_data_path(@user) %>
+
+<h2>Lending</h2>
+
+<%= bar_chart user_lending_chart_data_path(@user) %>
