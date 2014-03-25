@@ -2,9 +2,9 @@
 <% @investments.each do |investment| %>
     <tr>
       <td><%= investment.id %></td>
-      <td><%= investment.user.nil? ? '<i>Not yet scraped</i>'.html_safe : link_to(investment.user_name, investment.user.profile_url) %></td>
+      <td><%= investment.user.nil? ? '<i>Not yet scraped</i>'.html_safe : link_to(investment.user_name, user_path(investment.user)) %></td>
       <td><%= link_to(investment.loan_name, investment.loan.btcjam_url) %></td>
-      <td><%= investment.loan.user.nil? ? '<i>Not yet scraped</i>'.html_safe : link_to(investment.borrower_name, investment.loan.user.profile_url) %></td>
+      <td><%= investment.loan.user.nil? ? '<i>Not yet scraped</i>'.html_safe : link_to(investment.borrower_name, user_path(investment.loan.user)) %></td>
       <td><%= investment.state %></td>
       <td>฿<%= format_btc investment.amount %></td>
       <td><span title='<%= investment.invested_at.to_s %>'><%= investment.invested_at.to_date.to_s %></span></td>

@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
     @period = params[:period] || '3'
     @ratings = params[:rating] || ['A', 'B', 'C', 'D', 'E']
-    @columns = params[:columns] || session[:user_columns] || %w(alias profile_link rating total_repayments active_loans funding_loans overdue_payments active_investments approx_debt investment_ratio last_activity)
+    @user_columns = params[:columns] || session[:user_columns] || %w(alias profile_link rating total_repayments active_loans funding_loans overdue_payments active_investments approx_debt investment_ratio last_activity)
 
     @investment_ratio = params[:investment_ratio].to_f if params[:investment_ratio]
 
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     rating_values += [5, 4, 3] if @ratings.include? 'D'
     rating_values += [2, 1, 0] if @ratings.include? 'E'
 
-    all_users = User.where("alias LIKE :search", search: alias_search).where(credit_rating: rating_values).order("#{sort_column} #{sort_direction}")
+    all_users = User.where("alias LIKE :search", search: alias_search).where(credit_rating: rating_values).order("#{sort_column('user')} #{sort_direction('user')}")
     all_users = all_users.where("funding_count > 0") if params[:only_funding] == '1'
     all_users = all_users.where("investment_ratio >= :ratio", ratio: @investment_ratio) if params[:investment_ratio]
     all_users = all_users.where("last_active_at > :period", period: DateTime.now() - @period.to_i.months) unless @period == 'all'
@@ -35,6 +35,15 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_id(params[:id])
     raise ActiveRecord::RecordNotFound if @user.nil?
+
+    per_page = 10
+
+    @loan_columns = params[:loan_columns] || session[:loan_columns] || %w(name user_name loan_link state amount term total_to_repay return apr date)
+    loan_page = [[(@user.loans.count.to_f / per_page.to_f).ceil, params[:loan_page].to_i].min, 1].max
+    @loans = @user.loans.order("#{sort_column('loan')} #{sort_direction('loan')}").paginate(:page => loan_page, :per_page => per_page)
+
+    investment_page = [[(@user.investments.count.to_f / per_page.to_f).ceil, params[:investment_page].to_i].min, 1].max
+    @investments = @user.investments.order("#{sort_column('investment')} #{sort_direction('investment')}").paginate(:page => investment_page, :per_page => per_page)
   end
 
   def export

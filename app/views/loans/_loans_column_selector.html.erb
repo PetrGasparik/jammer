@@ -1,0 +1,68 @@
+
+
+<fieldset>
+  <legend class="expand">Select Columns</legend>
+
+  <div class="collapse">
+    <!-- tables for layout? sue me, I'm lazy -->
+    <table id="loan_column_selector" class="pure-table">
+      <tr>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="id" <%= @loan_columns.include?('id') ? 'checked="true"' : '' %>> <strong>ID:</strong> BTC Jam ID
+        </td>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="name" <%= @loan_columns.include?('name') ? 'checked="true"' : '' %>> <strong>Name:</strong> Loan name
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="user_name" <%= @loan_columns.include?('user_name') ? 'checked="true"' : '' %>> <strong>User Name:</strong> Name of BTC Jam user
+        </td>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="loan_link" <%= @loan_columns.include?('loan_link') ? 'checked="true"' : '' %>> <strong>Loan Link:</strong> Link to BTC Jam's loan page
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="user_link" <%= @loan_columns.include?('user_link') ? 'checked="true"' : '' %>> <strong>User Link:</strong> Link to BTC Jam user's page
+        </td>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="state" <%= @loan_columns.include?('state') ? 'checked="true"' : '' %>> <strong>State:</strong> State of loan (funding, active, repaid or overdue)
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="amount" <%= @loan_columns.include?('amount') ? 'checked="true"' : '' %>> <strong>Amount:</strong> Advertised amount of loan
+        </td>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="btc_per_payment" <%= @loan_columns.include?('btc_per_payment') ? 'checked="true"' : '' %>> <strong>BTC Per Payment:</strong> Amount to be paid per-payment
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="term" <%= @loan_columns.include?('term') ? 'checked="true"' : '' %>> <strong>Term:</strong> Length of loan in days
+        </td>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="payment_count" <%= @loan_columns.include?('payment_count') ? 'checked="true"' : '' %>> <strong>Payment count:</strong> Total number of payments to be repaid
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="total_to_repay" <%= @loan_columns.include?('total_to_repay') ? 'checked="true"' : '' %>> <strong>Total to repay:</strong> Amount to be repaid, including interest
+        </td>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="return" <%= @loan_columns.include?('return') ? 'checked="true"' : '' %>> <strong>% return:</strong> Percentage of initial investment made as profit, when repaid
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="apr" <%= @loan_columns.include?('apr') ? 'checked="true"' : '' %>> <strong>APR:</strong> Annual interest rate on loan
+        </td>
+        <td>
+          <input type="checkbox" name="loan_columns[]" value="date" <%= @loan_columns.include?('date') ? 'checked="true"' : '' %>> <strong>Date:</strong> Date of most recent investment in loan
+        </td>
+      </tr>
+    </table>
+
+  </div>
+</fieldset>

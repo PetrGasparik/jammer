@@ -1,69 +1,69 @@
 
 <tr>
-  <% if @columns.include? 'id' %>
-  <th><%= sortable 'id', 'ID' %></th>
+  <% if @user_columns.include? 'id' %>
+  <th><%= sortable 'user', 'id', 'ID' %></th>
   <% end %>
-  <% if @columns.include? 'alias' %>
-  <th><%= sortable 'alias', 'Name' %></th>
+  <% if @user_columns.include? 'alias' %>
+  <th><%= sortable 'user', 'alias', 'Name' %></th>
   <% end %>
-  <% if @columns.include? 'profile_link' %>
+  <% if @user_columns.include? 'profile_link' %>
   <th>Profile Link</th>
   <% end %>
-  <% if @columns.include? 'rating' %>
-  <th><%= sortable 'credit_rating', 'Rating' %></th>
+  <% if @user_columns.include? 'rating' %>
+  <th><%= sortable 'user', 'credit_rating', 'Rating' %></th>
   <% end %>
-  <% if @columns.include? 'loans' %>
-  <th><%= sortable 'loan_count', 'Loans' %></th>
+  <% if @user_columns.include? 'loans' %>
+  <th><%= sortable 'user', 'loan_count', 'Loans' %></th>
   <% end %>
-  <% if @columns.include? 'repaid_loans' %>
-  <th><%= sortable 'repaid_btc', 'Repaid Loans' %></th>
+  <% if @user_columns.include? 'repaid_loans' %>
+  <th><%= sortable 'user', 'repaid_btc', 'Repaid Loans' %></th>
   <% end %>
-  <% if @columns.include? 'total_repayments' %>
-  <th><%= sortable 'payments_btc', 'Total Repayments' %></th>
+  <% if @user_columns.include? 'total_repayments' %>
+  <th><%= sortable 'user', 'payments_btc', 'Total Repayments' %></th>
   <% end %>
-  <% if @columns.include? 'active_loans' %>
-  <th><%= sortable 'active_btc', 'Active Loans' %></th>
+  <% if @user_columns.include? 'active_loans' %>
+  <th><%= sortable 'user', 'active_btc', 'Active Loans' %></th>
   <% end %>
-  <% if @columns.include? 'funding_loans' %>
-  <th><%= sortable 'funding_btc', 'Funding Loans' %></th>
+  <% if @user_columns.include? 'funding_loans' %>
+  <th><%= sortable 'user', 'funding_btc', 'Funding Loans' %></th>
   <% end %>
-  <% if @columns.include? 'overdue_loans' %>
-  <th><%= sortable 'overdue_btc', 'Overdue Loans' %></th>
+  <% if @user_columns.include? 'overdue_loans' %>
+  <th><%= sortable 'user', 'overdue_btc', 'Overdue Loans' %></th>
   <% end %>
-  <% if @columns.include? 'approx_debt' %>
+  <% if @user_columns.include? 'approx_debt' %>
   <th>
-    <%= sortable 'total_debt', 'Approx Debt' %>
+    <%= sortable 'user', 'total_debt', 'Approx Debt' %>
     <%= image_tag('question.png', :title => "The approximate total debt calcualted for this user, based on loans they have opened and payments they have made.\n\nIf they have taken out exchange-tied loans and the exchange rate has changed significantly, this may be inaccurate.") %>
   </th>
   <% end %>
-  <% if @columns.include? 'future_debt' %>
+  <% if @user_columns.include? 'future_debt' %>
   <th>
-    <%= sortable 'future_debt', 'Debt Incl. Funding' %>
+    <%= sortable 'user', 'future_debt', 'Debt Incl. Funding' %>
     <%= image_tag('question.png', :title => "The approximate future debt calcualted for this user, based on loans they have opened, loans that are currently funding (should they fund) and payments they have made.\n\nIf they have taken out exchange-tied loans and the exchange rate has changed significantly, this may be inaccurate.") %>
   </th>
   <% end %>
-  <% if @columns.include? 'total_invested' %>
+  <% if @user_columns.include? 'total_invested' %>
   <th>
-    <%= sortable 'investments_btc', 'Total Invested' %>
+    <%= sortable 'user', 'investments_btc', 'Total Invested' %>
     <%= image_tag('question.png', :title => 'Investment figures are based on the full amount a user has invested, not the remaining investment yet to be received. This is for technical reasons, based on the information available by BTCJam.') %>
   </th>
   <% end %>
-  <% if @columns.include? 'active_investments' %>
-  <th><%= sortable 'active_investments_btc', 'Active Investments' %></th>
+  <% if @user_columns.include? 'active_investments' %>
+  <th><%= sortable 'user', 'active_investments_btc', 'Active Investments' %></th>
   <% end %>
-  <% if @columns.include? 'overdue_investments' %>
-  <th><%= sortable 'overdue_investments_btc', 'Overdue Investments' %></th>
+  <% if @user_columns.include? 'overdue_investments' %>
+  <th><%= sortable 'user', 'overdue_investments_btc', 'Overdue Investments' %></th>
   <% end %>
-  <% if @columns.include? 'funding_investments' %>
-  <th><%= sortable 'funding_investments_btc', 'Funding Investments' %></th>
+  <% if @user_columns.include? 'funding_investments' %>
+  <th><%= sortable 'user', 'funding_investments_btc', 'Funding Investments' %></th>
   <% end %>
-  <% if @columns.include? 'investment_ratio' %>
+  <% if @user_columns.include? 'investment_ratio' %>
   <th>
-    <%= sortable 'investment_ratio', 'Investment Ratio' %>
+    <%= sortable 'user', 'investment_ratio', 'Investment Ratio' %>
     <%= image_tag('question.png', :title => "The ratio of lending to borrowing this user has. A high ratio indicates that the user has invested more in the site than they have borrowed.\n\nThis shows a large amount of collateral invested in the site, and might make them a good investment target.") %>
   </th>
   <% end %>
-  <% if @columns.include? 'last_activity' %>
-  <th><%= sortable 'last_active_at', 'Last Activity' %></th>
+  <% if @user_columns.include? 'last_activity' %>
+  <th><%= sortable 'user', 'last_active_at', 'Last Activity' %></th>
   <% end %>
 </tr>

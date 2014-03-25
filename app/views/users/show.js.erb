@@ -1,0 +1,7 @@
+$("#loan_content").html("<%= escape_javascript(render('loans/loans_table_content', loans: @loans )) %>")
+$("#loan_table_header").html("<%= escape_javascript(render('loans/loans_table_header' )) %>")
+$("#loans_pagina").html("<%= escape_javascript(will_paginate @loans) %>")
+
+$("#invesment_content").html("<%= escape_javascript(render('investments/investments_table_content', investments: @investments )) %>")
+$("#invesment_table_header").html("<%= escape_javascript(render('investments/investments_table_header' )) %>")
+$("#invesments_pagina").html("<%= escape_javascript(will_paginate @loans) %>")

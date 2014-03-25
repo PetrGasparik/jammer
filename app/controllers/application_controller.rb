@@ -11,22 +11,20 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def sort_column
-    session_field = "#{params[:controller]}_sort".to_s
-    sort = params[:sort] || session[session_field] || 'id'
+  def sort_column(model)
+    sort = params["#{model}_sort".to_s] || session["#{model}_sort".to_s] || 'id'
     if sort =~ /^[a-z_]+$/
-      session[session_field] = params[:sort] if params[:sort]
+      session["#{model}_sort".to_s] = params["#{model}_sort".to_s] if params["#{model}_sort".to_s]
       sort
     else
       'id'
     end
   end
 
-  def sort_direction
-    session_field = "#{params[:controller]}_direction".to_s
-    dir = params[:direction] || session[session_field] || 'desc'
+  def sort_direction(model)
+    dir = params["#{model}_direction".to_s] || session["#{model}_direction".to_s] || 'desc'
     if %w[asc desc].include?(dir)
-      session[session_field] = params[:direction] if params[:direction]
+      session["#{model}_direction".to_s] = params["#{model}_direction".to_s] if params["#{model}_direction".to_s]
       dir
     else
       'desc'

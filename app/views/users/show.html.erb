@@ -13,3 +13,36 @@
 <h2>Lending</h2>
 
 <%= bar_chart user_lending_chart_data_path(@user) %>
+
+<h2>Loans</h2>
+
+<form class="pure-form" method="get" action="<%= user_path(@user) %>" id="loan_search">
+  <%= render 'loans/loans_column_selector' %>
+</form>
+
+<table class="pure-table">
+  <thead id="loan_table_header">
+  <%= render 'loans/loans_table_header', loans: @loans %></thead>
+  <tbody id="loan_content">
+  <%= render 'loans/loans_table_content', loans: @loans %>
+  </tbody>
+</table>
+
+<div id="loan_pagina" class="pagina">
+  <%= will_paginate @loans, :param_name => 'loan_page' %>
+</div>
+
+
+<h2>Investments</h2>
+
+<table class="pure-table">
+  <thead id="investment_table_header">
+  <%= render 'investments/investments_table_header', investments: @investments %></thead>
+  <tbody id="investment_content">
+  <%= render 'investments/investments_table_content', investments: @investments %>
+  </tbody>
+</table>
+
+<div id="investment_pagina" class="pagina">
+  <%= will_paginate @investments, :param_name => 'investment_page' %>
+</div>

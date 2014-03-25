@@ -1,64 +1,64 @@
 
 <% @users.each do |user| %>
     <tr>
-      <% if @columns.include? 'id' %>
+      <% if @user_columns.include? 'id' %>
       <td><%= user.id %></td>
       <% end %>
-      <% if @columns.include? 'alias' %>
+      <% if @user_columns.include? 'alias' %>
       <td><%= link_to user.alias, user_path(user) %></td>
       <% end %>
-      <% if @columns.include? 'profile_link' %>
+      <% if @user_columns.include? 'profile_link' %>
       <td><%= link_to user.profile_url, user.profile_url %></td>
       <% end %>
-      <% if @columns.include? 'rating' %>
+      <% if @user_columns.include? 'rating' %>
       <td><%= credit_rating_str user.credit_rating %></td>
       <% end %>
-      <% if @columns.include? 'loans' %>
+      <% if @user_columns.include? 'loans' %>
       <td><%= user.loan_count %><!-- <%= link_to 'View', user_path(user) %> --></td>
       <% end %>
-      <% if @columns.include? 'repaid_loans' %>
+      <% if @user_columns.include? 'repaid_loans' %>
       <td>฿<%= format_btc user.repaid_btc %> (<%= user.repaid_count %>)</td>
       <% end %>
-      <% if @columns.include? 'total_repayments' %>
+      <% if @user_columns.include? 'total_repayments' %>
       <td>฿<%= format_btc user.payments_btc %> (<%= user.payments_count %>)</td>
       <% end %>
-      <% if @columns.include? 'active_loans' %>
+      <% if @user_columns.include? 'active_loans' %>
       <td>฿<%= format_btc user.active_btc %> (<%= user.active_count %>)</td>
       <% end %>
-      <% if @columns.include? 'funding_loans' %>
+      <% if @user_columns.include? 'funding_loans' %>
       <td>฿<%= format_btc user.funding_btc %> (<%= user.funding_count %>)</td>
       <% end %>
-      <% if @columns.include? 'overdue_loans' %>
+      <% if @user_columns.include? 'overdue_loans' %>
       <td>฿<%= format_btc user.overdue_btc %> (<%= user.overdue_loan_count %>)</td>
       <% end %>
-      <% if @columns.include? 'approx_debt' %>
+      <% if @user_columns.include? 'approx_debt' %>
       <td>
         ฿<%= format_btc (user.total_debt.to_f / 10000000).round * 10000000 %>
         <%= image_tag('question_red.png', :title => 'This value is based on exchange-linked loans and may not be accurate') if user.total_debt_has_exchange_link %>
       </td>
       <% end %>
-      <% if @columns.include? 'future_debt' %>
+      <% if @user_columns.include? 'future_debt' %>
       <td>
         ฿<%= format_btc (user.future_debt.to_f / 10000000).round * 10000000 %>
         <%= image_tag('question_red.png', :title => 'This value is based on exchange-linked loans and may not be accurate') if user.future_debt_has_exchange_link %>
       </td>
       <% end %>
-      <% if @columns.include? 'total_investments' %>
+      <% if @user_columns.include? 'total_investments' %>
       <td>฿<%= format_btc user.investments_btc %> (<%= user.investments_count %>)</td>
       <% end %>
-      <% if @columns.include? 'active_investments' %>
+      <% if @user_columns.include? 'active_investments' %>
       <td>฿<%= format_btc user.active_investments_btc %> (<%= user.active_investments_count %>)</td>
       <% end %>
-      <% if @columns.include? 'overdue_investments' %>
+      <% if @user_columns.include? 'overdue_investments' %>
       <td>฿<%= format_btc user.overdue_investments_btc %> (<%= user.overdue_investments_count %>)</td>
       <% end %>
-      <% if @columns.include? 'funding_investments' %>
+      <% if @user_columns.include? 'funding_investments' %>
       <td>฿<%= format_btc user.funding_investments_btc %> (<%= user.funding_investments_count %>)</td>
       <% end %>
-      <% if @columns.include? 'investment_ratio' %>
+      <% if @user_columns.include? 'investment_ratio' %>
       <td><%= user.investment_ratio || 'N/A' %></td>
       <% end %>
-      <% if @columns.include? 'last_activity' %>
+      <% if @user_columns.include? 'last_activity' %>
       <td><span title='<%= user.last_active_at.to_s %>'><%= user.last_active_at.to_date.to_s %></span></td>
       <% end %>
     </tr>

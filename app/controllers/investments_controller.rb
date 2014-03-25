@@ -24,7 +24,7 @@ class InvestmentsController < ApplicationController
 
     @period = params[:period] || '3'
 
-    all_investments = Investment.where('user_name LIKE :user_name AND loan_name LIKE :loan_name AND borrower_name LIKE :borrower_name', user_name: user_name_search, loan_name: loan_name_search, borrower_name: borrower_name_search).order("#{sort_column} #{sort_direction}")
+    all_investments = Investment.where('user_name LIKE :user_name AND loan_name LIKE :loan_name AND borrower_name LIKE :borrower_name', user_name: user_name_search, loan_name: loan_name_search, borrower_name: borrower_name_search).order("#{sort_column('investment')} #{sort_direction('investment')}")
     all_investments = all_investments.where('invested_at > :period', period: DateTime.now() - @period.to_i.months) unless @period == 'all'
     all_investments = all_investments.where(state: @states.keys.select{ |k| @states[k] })
     page = [[(all_investments.count.to_f / per_page.to_f).ceil, params[:page].to_i].min, 1].max

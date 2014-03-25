@@ -12,14 +12,14 @@ module ApplicationHelper
     super *[collection_or_options, options].compact
   end
 
-  def sortable(column, title = nil)
+  def sortable(model, column, title = nil)
     title ||= column.titleize
-    css_class = column == sort_column ? "active #{sort_direction}" : nil
-    direction = column == sort_column && sort_direction == 'desc' ? 'asc' : 'desc'
-    title += sort_direction == 'asc' ? ' ▲' : ' ▼' if column == sort_column
+    css_class = column == sort_column(model) ? "active #{sort_direction(model)}" : nil
+    direction = column == sort_column(model) && sort_direction(model) == 'desc' ? 'asc' : 'desc'
+    title += sort_direction(model) == 'asc' ? ' ▲' : ' ▼' if column == sort_column(model)
 
-    link_parameters = {:sort => column, :direction => direction, :remote => true}
-    %w(page search filter alias period name funding overdue repaid active user_name loan_name borrower_name rating columns only_funding investment_ratio).each { |p| link_parameters.merge!( {p.to_sym => params[p]} )}
+    link_parameters = {"#{model}_sort".to_s => column, "#{model}_direction" => direction, :remote => true}
+    %w(page search filter alias period name funding overdue repaid active user_name loan_name borrower_name rating loan_columns user_columns only_funding investment_ratio).each { |p| link_parameters.merge!( {p.to_sym => params[p]} )}
 
     link_to(title, link_parameters, {:class => css_class})
   end
