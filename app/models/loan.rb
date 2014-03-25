@@ -112,6 +112,7 @@ class Loan < ActiveRecord::Base
       if loan.user
         loan.user_name = loan.user.alias
         loan.user.last_active_at = [loan.user.last_active_at || Time.at(0).to_datetime, loan.invested_at || Time.at(0).to_datetime].max
+        loan.user_rating = loan.user.credit_rating if loan.user_rating.nil?    # only cache this the first time we see it, to keep the historical value
         loan.user.save!
       end
       loan.save!
