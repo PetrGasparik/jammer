@@ -8,7 +8,7 @@
       <td><%= loan.name %></td>
       <% end %>
       <% if @loan_columns.include? 'user_name' %>
-      <td><%= loan.user ? link_to loan.user_name, user_path(loan.user) : '<i>Not yet scraped</i>'.html_safe %></td>
+      <td><%= loan.user ? link_to(loan.user_name, user_path(loan.user)) : '<i>Not yet scraped</i>'.html_safe %></td>
       <% end %>
       <% if @loan_columns.include? 'loan_link' %>
       <td><%= link_to loan.btcjam_url, "#{loan.btcjam_url}_from_btcjammer" %></td>
