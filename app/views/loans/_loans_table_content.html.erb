@@ -41,7 +41,7 @@
       <td><%= loan.apr.round(2) %>%</td>
       <% end %>
       <% if @loan_columns.include? 'date' %>
-      <td><span title='<%= loan.invested_at.to_s %>'><%= loan.invested_at.to_date.to_s %></span></td>
+      <td><span title='<%= (loan.invested_at || DateTime.now).to_s %>'><%= (loan.invested_at || DateTime.now).to_date.to_s %></span></td>
       <% end %>
     </tr>
 <% end %>
