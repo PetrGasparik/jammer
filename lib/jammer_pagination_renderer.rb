@@ -4,10 +4,10 @@ module Jammer
   protected
 
     def page_number(page)
-      unless page == current_page
-        link(tag(:li, page, :class => 'pure-button'), page, :rel => rel_value(page))
-      else
+      if page == current_page
         tag(:li, page, :class => 'pure-button pure-button-active pure-button-selected')
+      else
+        link(tag(:li, page, :class => 'pure-button'), page, :rel => rel_value(page), :class => 'paginator-link')
       end
     end
 
@@ -17,7 +17,7 @@ module Jammer
 
     def previous_or_next_page(page, text, classname)
       if page
-        link(tag(:li, text, :class => 'pure-button'), page)
+        link(tag(:li, text, :class => 'pure-button'), page, :class => 'paginator-link')
       else
         tag(:li, text, :class => 'pure-button pure-button-disabled disabled')
       end

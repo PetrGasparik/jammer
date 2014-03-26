@@ -29,7 +29,7 @@
 </table>
 
 <div id="loan_pagina" class="pagina">
-  <%= will_paginate @loans, :param_name => 'loan_page' %>
+  <%= paginator @loans, 'loan_page' %>
 </div>
 
 
@@ -44,5 +44,5 @@
 </table>
 
 <div id="investment_pagina" class="pagina">
-  <%= will_paginate @investments, :param_name => 'investment_page' %>
+  <%= paginator @investments, 'investment_page' %>
 </div>

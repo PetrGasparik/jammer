@@ -38,4 +38,8 @@ module ApplicationHelper
     str = credit_rating_str(rating)
     "<span class='credit_label credit_#{str[0].downcase}'>#{str}</span>".html_safe
   end
+
+  def paginator(collection, param_name = 'page')
+    will_paginate(collection, :param_name => param_name) + '<script>$(function() {$("a.paginator-link").on("click", function(){$.getScript(this.href);return false;});});</script>'.html_safe
+  end
 end
