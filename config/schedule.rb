@@ -20,6 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 
 set :job_template, "bash -l -c 'rvm use 2.0.0; :job'"
+set :output, {:error => 'log/cron_errors.log', :output => 'log/cron.log'}
 
 every 1.day, :at => '4:30 am' do
   rake 'jammer:update'
