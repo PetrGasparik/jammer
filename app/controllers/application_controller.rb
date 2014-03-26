@@ -4,9 +4,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :format_btc, :sort_column, :sort_direction
+  before_filter :last_update
 
   def format_btc(btc)
     btc.to_s.rjust(9, '0').insert(-9, '.').sub(/[0]+$/, '').sub(/\.$/, '').rjust(1, '0')
+  end
+
+  def last_update
+    p = Parameter.find_by_key('last_update')
+    @last_update = p ? p.value : 'Unknown'
   end
 
   protected

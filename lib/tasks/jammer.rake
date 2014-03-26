@@ -6,5 +6,6 @@ namespace :jammer do
     User.update_cached_data!
     Loan.update_cached_data!
     Investment.update_cached_data!
+    Parameter.set_last_update_time!
   end
 end

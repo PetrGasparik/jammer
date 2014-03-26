@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325205724) do
+ActiveRecord::Schema.define(version: 20140326101643) do
 
   create_table "impressions", force: true do |t|
     t.string   "impressionable_type"
@@ -72,6 +72,15 @@ ActiveRecord::Schema.define(version: 20140325205724) do
   add_index "loans", ["state"], name: "index_loans_on_state", using: :btree
   add_index "loans", ["user_id", "state"], name: "index_loans_on_user_id_and_state", using: :btree
   add_index "loans", ["user_id"], name: "index_loans_on_user_id", using: :btree
+
+  create_table "parameters", force: true do |t|
+    t.string   "key"
+    t.text     "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "parameters", ["key"], name: "index_parameters_on_key", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "alias"
