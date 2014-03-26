@@ -17,3 +17,10 @@ $(function() {
 
 })(jQuery);
 
+// paginate with AJAX
+$(function() {
+    $("a.paginator-link").on("click", function(){
+        $.getScript(this.href);
+        return false;
+    });
+});

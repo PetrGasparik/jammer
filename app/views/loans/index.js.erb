@@ -1,3 +1,5 @@
 $("#loan_content").html("<%= escape_javascript(render('loans_table_content', users: @loans )) %>")
 $("#table_header").html("<%= escape_javascript(render('loans_table_header' )) %>")
 $("#loans_pagina").html("<%= escape_javascript(paginator @loans) %>")
+
+$(function() {$("a.paginator-link").on("click", function(){$.getScript(this.href);return false;});});

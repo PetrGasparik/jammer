@@ -40,6 +40,6 @@ module ApplicationHelper
   end
 
   def paginator(collection, param_name = 'page')
-    will_paginate(collection, :param_name => param_name) + '<script>$(function() {$("a.paginator-link").on("click", function(){$.getScript(this.href);return false;});});</script>'.html_safe
+    will_paginate(collection, :param_name => param_name)
   end
 end

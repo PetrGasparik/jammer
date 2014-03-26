@@ -1,3 +1,5 @@
 $("#investment_content").html("<%= escape_javascript(render('investments_table_content', investments: @investments )) %>")
 $("#table_header").html("<%= escape_javascript(render('investments_table_header' )) %>")
 $("#pagina").html("<%= escape_javascript(paginator @loans) %>")
+
+$(function() {$("a.paginator-link").on("click", function(){$.getScript(this.href);return false;});});
