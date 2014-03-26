@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
     @period = params[:period] || '3'
     @ratings = params[:rating] || ['A', 'B', 'C', 'D', 'E']
-    @user_columns = params[:columns] || session[:user_columns] || %w(alias profile_link rating total_repayments active_loans funding_loans overdue_payments active_investments approx_debt investment_ratio last_activity)
+    @user_columns = params[:columns] || session[:user_columns] || %w(alias rating total_repayments active_loans funding_loans overdue_payments active_investments approx_debt investment_ratio last_activity)
 
     @investment_ratio = params[:investment_ratio].to_f if params[:investment_ratio]
 
