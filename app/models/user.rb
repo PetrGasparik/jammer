@@ -137,6 +137,14 @@ class User < ActiveRecord::Base
     "https://btcjam.com/users/#{self.id}"
   end
 
+  def avatar_file
+    avatar.to_s.length > 0 ? "#{::Rails.root}/public/avatars/#{avatar}" : ''
+  end
+
+  def avatar_path
+    avatar.to_s.length > 0 ? "/avatars/#{avatar}" : ''
+  end
+
   private
 
   def self.from_btc_str(s)

@@ -1,4 +1,4 @@
-<h1><%= credit_label @user.credit_rating %> <%= @user.alias %></h1>
+<h1><div class='avatar'><span class='baseline'><%= credit_label @user.credit_rating %> <%= @user.alias %></span> <%= File.exist?(@user.avatar_file) ? "<img src='#{@user.avatar_path}' alt='User Avatar'>".html_safe : '' %> </div></h1>
 
 <strong>BTC Jam Profile URL:</strong> <%= link_to @user.profile_url, @user.profile_url %>
 

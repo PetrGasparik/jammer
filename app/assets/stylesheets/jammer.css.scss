@@ -38,6 +38,7 @@ h5,
 h6 {
     border-bottom: 1px solid #e4e1d7;
     color: #5F5496;
+    vertical-align: top;
 }
 
 .strikethrough {
@@ -100,4 +101,17 @@ a.active {
 
 .expand a:hover, .expand a:active, .expand a:focus {
     text-decoration: underline;
+}
+
+div.avatar img {
+  float: right;
+}
+
+span.baseline {
+  vertical-align: bottom;
+}
+
+div.avatar {
+  overflow: hidden;
+  padding-bottom: 10px;
 }
