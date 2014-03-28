@@ -22,6 +22,8 @@ set :deploy_to, '/var/www/jammer.sd.ai/rails'
 # Default value for :log_level is :debug
 set :log_level, :info
 
+set :linked_dirs, fetch(:linked_dirs) + %w{public/avatars}
+
 namespace :deploy do
 
   desc 'Restart application'

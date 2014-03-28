@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326101643) do
+ActiveRecord::Schema.define(version: 20140328200636) do
 
   create_table "impressions", force: true do |t|
     t.string   "impressionable_type"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20140326101643) do
     t.float    "investment_ratio"
     t.datetime "last_active_at"
     t.integer  "credit_rating"
+    t.string   "avatar"
   end
 
   add_index "users", ["alias"], name: "index_users_on_alias", using: :btree

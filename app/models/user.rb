@@ -50,6 +50,20 @@ class User < ActiveRecord::Base
                      :overdue_count => overdue_count,
                      :credit_rating => credit_rating}
 
+          avatar_img = page.parser.at_xpath("(img|*//img)[contains(@src, '//')]")
+          if avatar_img
+            src = avatar_img['src']
+            if src == '//cdn.mxpnl.com/site_media/images/partner/badge_light.png'
+              params[:avatar] = ''
+            else
+              src = "http:#{src}" if src =~ /^\/\//
+              format = src.scan(/\.([a-z]+)(\?|\z)/).first.first
+              attribs[:avatar] = "#{avatar_img['alt']}.#{format}"
+              destfile = "#{::Rails.root}/public/avatars/#{attribs[:avatar]}"
+              agent.get(src).save!(destfile)
+            end
+          end
+
           if user
             user.update_attributes!(attribs) or raise "Failed to update user #{uid}"
           else
