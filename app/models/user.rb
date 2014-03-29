@@ -50,18 +50,21 @@ class User < ActiveRecord::Base
                      :overdue_count => overdue_count,
                      :credit_rating => credit_rating}
 
-          avatar_img = page.parser.at_xpath("(img|*//img)[contains(@src, '//')]")
+          avatar_img = page.parser.at_xpath("(img|*//img)[contains(@src, 'https://btcjam.s3.amazonaws.com')]")
           if avatar_img
             src = avatar_img['src']
-            if src == '//cdn.mxpnl.com/site_media/images/partner/badge_light.png'
-              params[:avatar] = ''
-            else
-              src = "http:#{src}" if src =~ /^\/\//
-              format = src.scan(/\.([a-z]+)(\?|\z)/).first.first
+            if src.include?('medium')
+              res = src.scan(/\.([a-z]+)(\?|\z)/).first
+              format = res ? res.first : 'jpg'
+              format = 'jpg' if format == 'txt'
               attribs[:avatar] = "#{avatar_img['alt']}.#{format}"
               destfile = "#{::Rails.root}/public/avatars/#{attribs[:avatar]}"
               agent.get(src).save!(destfile)
+            else
+              attribs[:avatar] = ''
             end
+          else
+            attribs[:avatar] = ''
           end
 
           if user
