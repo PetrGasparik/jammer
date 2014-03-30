@@ -1,0 +1,11 @@
+development:
+  callback: http://localhost:3000/oauth/callback
+  jam_id: d6b5b481d1ba20ef9397cddc5b7c8a29e1c303f7be34a7604c74e09145070590
+  jam_secret_file: c:/users/simon/code/jammer-devel.secret
+  jam_url: https://btcjam.com/
+
+production:
+  callback: http://jam.sd.ai/oauth2/callback
+  jam_id: 8d4c2374918729745ef179e153a9d19659d2292991f8d3843551167ff30015ef
+  jam_secret_file: /var/www/jammer.sd.ai/.btcjam-secret
+  jam_url: https://btcjam.com/

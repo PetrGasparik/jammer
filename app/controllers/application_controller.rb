@@ -1,3 +1,5 @@
+require 'oauth2'
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -35,5 +37,15 @@ class ApplicationController < ActionController::Base
     else
       'desc'
     end
+  end
+
+  def btcjam_client
+    OAuth2::Client.new(OAUTH_CONFIG['jam_id'], OAUTH_CONFIG['jam_secret'], :site => {
+        :url=>OAUTH_CONFIG['jam_url'],
+        :ssl=>{
+            :verify => OpenSSL::SSL::VERIFY_PEER,
+            :ca_file => Jammer::Application.config.ca_file
+        }
+    })
   end
 end

@@ -106,6 +106,11 @@ class UsersController < ApplicationController
     render :json => data
   end
 
+  def authenticate
+    client = btcjam_client
+    redirect_to client.auth_code.authorize_url(:redirect_uri => OAUTH_CONFIG['callback'], :state => 'btcjam')
+  end
+
   private
   def set_tab
     @menu_tab = 'users'

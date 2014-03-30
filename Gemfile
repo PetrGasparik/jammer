@@ -61,3 +61,6 @@ gem 'will_paginate'
 
 # Pretty charts
 gem 'chartkick'
+
+# oauth
+gem 'oauth2'

@@ -1,8 +1,10 @@
 Jammer::Application.routes.draw do
 
-  get "investments/list"
+  get 'oauth/callback'
+
   resources :users, only: [:index, :show] do
     get :export, :on => :collection
+    get :authenticate, :on => :collection
     get :al_chart_data
     get :borrowing_chart_data
     get :lending_chart_data
